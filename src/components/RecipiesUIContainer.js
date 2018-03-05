@@ -3,7 +3,7 @@ import {AddRecipe} from './AddRecipe';
 
 export const RecipiesUIContainer = ({recipies}) => {
     return (
-        <div>
+        <div className="ui-container">
             <RecipesList recipies={recipies} />
             <AddRecipe />
         </div>
