@@ -4,6 +4,11 @@ import getBaseUrl from '../../buildScripts/baseUrl';
 
 const baseUrl = getBaseUrl();
 
+// When UI would be ready, separate on three branches:
+// - Calls to mock data (DB)
+// // - Redux + calls to mock data (DB) 
+// - FCC: calls to local storage
+
 export function getRecepies() {
     return get('recepies');
 }
