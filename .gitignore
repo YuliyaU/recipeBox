@@ -60,5 +60,6 @@ typings/
 # my changes
 
 dist/bundle.js
+dist/*.bundle.js
 src/api/db.json
 
