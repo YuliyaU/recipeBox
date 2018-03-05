@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import { RecipiesUIContainer } from './RecipiesUIContainer';
+import '../stylesheets/main.scss';
 
 export class App extends Component {
     constructor(props) {
@@ -30,7 +31,7 @@ export class App extends Component {
 
     render() {
         return(
-            <div>
+            <div className="container">
                 <header><h1>RecipeBox</h1></header>
                 <RecipiesUIContainer recipies={this.state.recipies} />                
                 <footer><span>Made by Yuliya Ulanova, 2018</span></footer>

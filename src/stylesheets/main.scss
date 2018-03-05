@@ -12,7 +12,37 @@ Table of contents:
 
 /*** 1. CSS Reset ***/
 
+h2 {
+    font-size: 1.8rem;
+}
 
+li {
+    padding: 1.0rem;
+    border-width: 1px 0;
+    border-style: solid;
+    border-color: #bbb; 
+    list-style-type: none;
+}
+
+footer {
+    padding: 2.0rem 0;
+}
 
 /*** 2. Custom CSS Styles ***/
 
+.container {
+    max-width: 70%;
+    margin: 0 auto;
+}
+
+.ui-container {
+    padding: 4.0rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #bbb;
+}
+
+.plus-btn-tip {
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+}

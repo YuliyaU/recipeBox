@@ -1,12 +1,19 @@
 export const AddRecipe = () => {
     return (
         <div>
-            <button>+</button><span>Add a Recipe</span>
+            <button>+</button><span className="plus-btn-tip">Add a Recipe</span>
+            <h2>Add New Recipe</h2>
             <form>
-                <input type="text" />
-                <button>+</button><span>Add Ingredient</span>
-                <button>Cancel</button>
-                <button>Save the Recipe</button>
+                <div>
+                    <input type="text" />
+                </div>
+                <div>
+                    <button>+</button><span className="plus-btn-tip">Add Ingredient</span>
+                </div>
+                <div>
+                    <button>Cancel</button>
+                    <button>Save the Recipe</button>
+                </div>                
             </form>
         </div>
     );
