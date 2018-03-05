@@ -7,7 +7,7 @@
     "watch-webpack": "webpack -w",
     "launch-server": "node server.js",
     "localtunnel": "lt --port 3000 --subdomain yuliyadev",
-    "start": "npm-run-all --parallel watch-webpack launch-server",
+    "start": "npm-run-all --parallel watch-webpack launch-server start-mock-api",
     "share": "npm-run-all --parallel watch-webpack launch-server localtunnel",
     "generate-mock-data": "node buildScripts/generateMockData.js",
     "prestart-mock-api": "npm run generate-mock-data",
