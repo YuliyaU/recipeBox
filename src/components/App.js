@@ -1,5 +1,5 @@
 import {Component} from 'react';
-import { RecipesList } from './RecipesList';
+import { RecipiesUIContainer } from './RecipiesUIContainer';
 
 export class App extends Component {
     constructor(props) {
@@ -31,7 +31,9 @@ export class App extends Component {
     render() {
         return(
             <div>
-                <RecipesList recipies={this.state.recipies} />
+                <header><h1>RecipeBox</h1></header>
+                <RecipiesUIContainer recipies={this.state.recipies} />                
+                <footer><span>Made by Yuliya Ulanova, 2018</span></footer>
             </div>
         );
     }
