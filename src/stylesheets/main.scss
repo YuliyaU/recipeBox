@@ -8,7 +8,7 @@ Table of contents:
 
 /*** 0. Sass variables ***/
 
-
+$neutralColor: #bbb;
 
 /*** 1. CSS Reset ***/
 
@@ -31,18 +31,30 @@ footer {
     padding: 4.0rem;
     border-width: 1px;
     border-style: solid;
-    border-color: #bbb;
+    border-color: $neutralColor;
 }
 
 .recipe-block {
     padding: 1.0rem;
     border-width: 1px 0;
     border-style: solid;
-    border-color: #bbb; 
+    border-color: $neutralColor; 
     list-style-type: none;
 }
 
 .btn-tip {
     padding: 0 0.5rem;
     font-size: 0.8rem;
+}
+
+.add-ingredient {
+    display: inline-block;
+}
+
+.added-ingredient {
+    margin-right: 0.5rem; 
+    padding: 0.5rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: $neutralColor;
 }

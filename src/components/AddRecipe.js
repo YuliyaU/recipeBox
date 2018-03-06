@@ -1,7 +1,8 @@
 import {Component} from 'react';
 import {AddIngredientBtn} from './AddIngredientBtn';
 import {AddIngredient} from './AddIngredient';
-import { Ingredient } from './Ingredient';
+import {Ingredient} from './Ingredient';
+import {IngredientPill} from './IngredientPill';
 
 export class AddRecipe extends Component {
     constructor(props) {
@@ -40,9 +41,15 @@ export class AddRecipe extends Component {
                     <div>
                         <input type="text" placeholder="Recipe Name" />
                     </div>
-                    {this.state.isAddIngredientClicked ? 
-                        <AddIngredient handleClick={this.handleClick}/> : 
-                        <AddIngredientBtn handleClick={this.handleClick}/>}
+                    <div>
+                        { this.state.addedIngredients ? 
+                            this.state.addedIngredients.map((ingredient, index) => 
+                                <IngredientPill key={index}
+                                                ingredient={ingredient}/>) : null }
+                        { this.state.isAddIngredientClicked ? 
+                            <AddIngredient handleClick={this.handleClick}/> : 
+                            <AddIngredientBtn handleClick={this.handleClick}/> }
+                    </div>
                     <div>
                         <button>Cancel</button>
                         <button type="submit">Save the Recipe</button>

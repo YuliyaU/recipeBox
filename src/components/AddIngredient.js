@@ -10,7 +10,7 @@ export const AddIngredient = (props) => {
     }
 
     return (
-        <div id="add-ingredient">
+        <div id="add-ingredient" className="add-ingredient">
             <input type="text"
                     placeholder="Ingredient"
                     onChange={e => handleChange(e)} />
