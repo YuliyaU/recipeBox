@@ -7,10 +7,11 @@ export const Recipe = ({recipe, onRecipeDelete}) => {
         onRecipeDelete(recipeId);
     }
 
+    // Show a recipe item onClick
     return (
         <li className="recipe-block">
             <div>{recipe.recipeName ? recipe.recipeName : 'Untitled Recipe'}</div>
-            <ul>{recipe.ingredients ? recipe.ingredients.map((ingredient, index) => 
+            <ul className="recipe-info">{recipe.ingredients ? recipe.ingredients.map((ingredient, index) => 
                     <Ingredient key={index}
                                 ingredient={ingredient}/>) : 
                     'There is no ingredients'}</ul>

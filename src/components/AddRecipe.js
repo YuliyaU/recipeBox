@@ -3,6 +3,7 @@ import {AddIngredientBtn} from './AddIngredientBtn';
 import {AddIngredient} from './AddIngredient';
 import {Ingredient} from './Ingredient';
 import {IngredientPill} from './IngredientPill';
+import TiPlus from 'react-icons/lib/ti/plus';
 
 export class AddRecipe extends Component {
     constructor(props) {
@@ -11,10 +12,19 @@ export class AddRecipe extends Component {
             isAddIngredientClicked: false,
             addedIngredients: []
         }
-         
+        
+        this.handleAddRecipeClick = this.handleAddRecipeClick.bind(this);
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onCancel = this.onCancel.bind(this);
+    }
+
+    // Show a form above all other elements and slide it to the top of the up
+    handleAddRecipeClick() {
+        var addRecipeForm = document.getElementById('add-recipe-form');
+        if (!addRecipeForm.classList.contains('unhid')) {
+            addRecipeForm.classList.add('unhid');
+        }
     }
 
     handleClick(e, ingredient) {               
@@ -50,6 +60,12 @@ export class AddRecipe extends Component {
         this.setState({
             addedIngredients: []
         });
+
+        // Change or remove completely transition and instantly hide the form
+        var addRecipeForm = document.getElementById('add-recipe-form');
+        if (addRecipeForm.classList.contains('unhid')) {
+            addRecipeForm.classList.remove('unhid');
+        }
     }
 
     // A bag (fixed):
@@ -75,27 +91,31 @@ export class AddRecipe extends Component {
         var _recipeName = '';
         return (
             <div>
-                <button>+</button><span className="btn-tip">Add a Recipe</span>
-                <h2>Add New Recipe</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <input type="text"
-                               placeholder="Recipe Name"
-                               ref="_recipeName" />
-                    </div>
-                    <div>
-                        { this.state.addedIngredients ? 
-                            this.state.addedIngredients.map((ingredient, index) => 
-                                <IngredientPill key={index}
-                                                ingredient={ingredient}/>) : null }
-                        { this.state.isAddIngredientClicked ? 
-                            <AddIngredient handleClick={this.handleClick}/> : 
-                            <AddIngredientBtn handleClick={this.handleClick}/> }
-                    </div>
-                    <div>
-                        <button onClick={e => this.onCancel(e)}>Cancel</button>
-                        <button type="submit">Save the Recipe</button>
-                    </div>                
+                <button onClick={this.handleAddRecipeClick}><TiPlus /></button><span className="btn-tip">Add a Recipe</span>
+                <form onSubmit={this.handleSubmit}
+                      id="add-recipe-form"
+                      className="add-recipe-form">
+                    <fieldset>
+                        <legend>Add New Recipe</legend>
+                        <div>
+                            <input type="text"
+                                placeholder="Recipe Name"
+                                ref="_recipeName" />
+                        </div>
+                        <div>
+                            { this.state.addedIngredients ? 
+                                this.state.addedIngredients.map((ingredient, index) => 
+                                    <IngredientPill key={index}
+                                                    ingredient={ingredient}/>) : null }
+                            { this.state.isAddIngredientClicked ? 
+                                <AddIngredient handleClick={this.handleClick}/> : 
+                                <AddIngredientBtn handleClick={this.handleClick}/> }
+                        </div>
+                        <div>
+                            <button onClick={e => this.onCancel(e)}>Cancel</button>
+                            <button type="submit">Save the Recipe</button>
+                        </div>   
+                    </fieldset>             
                 </form>
             </div>
         );
