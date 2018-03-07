@@ -14,6 +14,7 @@ export class AddRecipe extends Component {
          
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onCancel = this.onCancel.bind(this);
     }
 
     handleClick(e, ingredient) {               
@@ -51,6 +52,14 @@ export class AddRecipe extends Component {
         });
     }
 
+    onCancel() {
+        var recipeName = this.refs._recipeName;
+        recipeName.value = '';
+        this.setState({
+            addedIngredients: []
+        });
+    }
+
     render() {
         var _recipeName = '';
         return (
@@ -73,7 +82,7 @@ export class AddRecipe extends Component {
                             <AddIngredientBtn handleClick={this.handleClick}/> }
                     </div>
                     <div>
-                        <button>Cancel</button>
+                        <button onClick={this.onCancel}>Cancel</button>
                         <button type="submit">Save the Recipe</button>
                     </div>                
                 </form>
