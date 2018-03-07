@@ -41,7 +41,7 @@ export class AddRecipe extends Component {
         console.log('refs value ' + recipeName.value);
 
         this.props.onNewRecipe({
-            id: Math.floor(Math.random * this.state.addedIngredients.length),
+            id: recipeName.value + Math.floor(Math.random() * recipeName.value.length),
             recipeName: recipeName.value,
             ingredients: this.state.addedIngredients
         });
@@ -52,7 +52,16 @@ export class AddRecipe extends Component {
         });
     }
 
-    onCancel() {
+    // A bag (fixed):
+    // The onCancel() doesn't only clear the form but changes a recipies state
+    // And adds canceled recipe into a recipies list
+
+    // A bag:
+    // The onCancel() doesn't clear and cancel the ingredient input when 
+    // isAddIngredientClicked = true and doesn't change it to false
+    // it stays as an input field with confirm btn  
+    onCancel(e) {
+        e.preventDefault(); // Prevents the state to be changed and doesn't adds a canceled recipe to the recipies list 
         var recipeName = this.refs._recipeName;
         recipeName.value = '';
         this.setState({
@@ -82,7 +91,7 @@ export class AddRecipe extends Component {
                             <AddIngredientBtn handleClick={this.handleClick}/> }
                     </div>
                     <div>
-                        <button onClick={this.onCancel}>Cancel</button>
+                        <button onClick={e => this.onCancel(e)}>Cancel</button>
                         <button type="submit">Save the Recipe</button>
                     </div>                
                 </form>
