@@ -60,6 +60,8 @@ export class AddRecipe extends Component {
     // The onCancel() doesn't clear and cancel the ingredient input when 
     // isAddIngredientClicked = true and doesn't change it to false
     // it stays as an input field with confirm btn  
+    // Check out the simillar bag onSubmit => 
+    // Give a message that the user haven't confirmed an entered ingredient
     onCancel(e) {
         e.preventDefault(); // Prevents the state to be changed and doesn't adds a canceled recipe to the recipies list 
         var recipeName = this.refs._recipeName;

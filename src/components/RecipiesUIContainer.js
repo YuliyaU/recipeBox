@@ -29,6 +29,7 @@ export class RecipiesUIContainer extends Component {
         }
 
         this.addNewRecipe = this.addNewRecipe.bind(this);
+        this.deleteRecipe = this.deleteRecipe.bind(this);
     }
 
     addNewRecipe(newRecipe) {
@@ -40,10 +41,25 @@ export class RecipiesUIContainer extends Component {
         }, () => console.log(this.state.recipies));
     }
 
+    deleteRecipe(id) {
+        var newRecipiesArr = this.state.recipies;
+        for (var i = 0; i < newRecipiesArr.length; i += 1) {
+            if (newRecipiesArr[i]['id'] == id) {
+                newRecipiesArr.splice(i, 1);
+                this.setState({
+                    recipies: newRecipiesArr
+                }, () => console.log(this.state.recipies))
+            } else {
+                console.log('The recipe is not found')
+            }
+        }
+    }
+
     render() {
         return (
             <div className="ui-container">
-                <RecipesList recipies={this.state.recipies} />
+                <RecipesList recipies={this.state.recipies}
+                             onRecipeDelete={this.deleteRecipe} />
                 <AddRecipe onNewRecipe={this.addNewRecipe}/>
             </div>
         );
