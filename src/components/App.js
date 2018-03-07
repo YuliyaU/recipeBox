@@ -1,5 +1,6 @@
 import {Component} from 'react';
 import { RecipiesUIContainer } from './RecipiesUIContainer';
+import '../stylesheets/main.scss';
 
 export class App extends Component {
     constructor(props) {
@@ -26,13 +27,25 @@ export class App extends Component {
                 {"id":88476724.4485286,"recipeName":"","ingredients":[{"ingredientName":"ex nostrud la"},{"ingredientName":"ea sed cupidatat"}]}
             ]
         }
+
+        this.addNewRecipe = this.addNewRecipe.bind(this);
+    }
+
+    addNewRecipe(newRecipe) {
+        this.setState({
+            recipies: [
+                ...this.state.recipies,
+                newRecipe
+            ]
+        }, () => console.log(this.state.recipies));
     }
 
     render() {
         return(
-            <div>
+            <div className="container">
                 <header><h1>RecipeBox</h1></header>
-                <RecipiesUIContainer recipies={this.state.recipies} />                
+                <RecipiesUIContainer recipies={this.state.recipies}
+                                     onNewRecipe={this.addNewRecipe}/>                
                 <footer><span>Made by Yuliya Ulanova, 2018</span></footer>
             </div>
         );

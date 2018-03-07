@@ -1,11 +1,11 @@
 import {RecipesList} from './RecipiesList';
 import {AddRecipe} from './AddRecipe';
 
-export const RecipiesUIContainer = ({recipies}) => {
+export const RecipiesUIContainer = ({recipies, onNewRecipe}) => {
     return (
-        <div>
+        <div className="ui-container">
             <RecipesList recipies={recipies} />
-            <AddRecipe />
+            <AddRecipe onNewRecipe={onNewRecipe}/>
         </div>
     );
 } 
