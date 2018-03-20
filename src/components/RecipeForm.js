@@ -14,6 +14,7 @@ export class RecipeForm extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.generateId = this.generateId.bind(this);
+        this.onDeleteIngredient = this.onDeleteIngredient.bind(this);
         this.onCancel = this.onCancel.bind(this);
     }
 
@@ -66,6 +67,20 @@ export class RecipeForm extends Component {
         return id;
     }
 
+    onDeleteIngredient(e, ingredientId) {
+        var newIngredientsArr = this.state.addedIngredients;
+        for (var i = 0; i < newIngredientsArr.length; i += 1) {
+            if (newIngredientsArr[i]['ingredientId'] == ingredientId) {
+                newIngredientsArr.splice(i, 1);
+                this.setState({
+                    addedIngredients: newIngredientsArr
+                }, () => console.log(this.state.addedIngredients));
+            } else {
+                console.log("The ingredient wasn't found.");
+            }
+        }
+    }
+
     // A bag (fixed):
     // The onCancel() doesn't only clear the form but changes a recipies state
     // And adds canceled recipe into a recipies list
@@ -100,11 +115,14 @@ export class RecipeForm extends Component {
                     </div>
                     <div>
                         { this.state.addedIngredients ? 
-                            this.state.addedIngredients.map((ingredient, index) => 
-                                <IngredientPill key={index}
-                                                ingredient={ingredient}/>) : null }
+                            this.state.addedIngredients.map(ingredient => 
+                                <IngredientPill key={ingredient.ingredientId}
+                                                ingredient={ingredient}
+                                                isEditMode={this.props.isEditMode}
+                                                onDeleteIngredient={this.onDeleteIngredient}/>) : null }
                         { this.state.isAddIngredientClicked ? 
-                            <AddIngredient handleClick={this.handleClick}/> : 
+                            <AddIngredient handleClick={this.handleClick}
+                                           generateId={this.generateId}/> : 
                             <AddIngredientBtn handleClick={this.handleClick}/> }
                     </div>
                     <div>
