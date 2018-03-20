@@ -35,24 +35,36 @@ export class RecipeForm extends Component {
         }
     }
 
-    handleSubmit(e) {
+    handleSubmit(e, recipeId) {
         e.preventDefault();   
         
         var recipeName = this.refs._recipeName;
         console.log('refs value ' + recipeName.value);
 
-        this.props.onNewRecipe({
-            id: this.generateId(),
-            recipeName: recipeName.value,
-            ingredients: this.state.addedIngredients
-        });
+        if (recipeId) {
+            this.props.editRecipe(recipeId, {
+                id: recipeId,
+                recipeName: recipeName.value,
+                ingredients: this.state.addedIngredients
+            });
+        } else {
+            this.props.onNewRecipe({
+                id: this.generateId(),
+                recipeName: recipeName.value,
+                ingredients: this.state.addedIngredients
+            });
+        }
 
         recipeName.value = '';
         this.setState({
             addedIngredients: [],
         });
 
-        this.props.closeAddRecipeForm();
+        if (this.props.isEditMode) {
+            this.props.closeEditForm();
+        } else {
+            this.props.closeAddRecipeForm();
+        }        
 
         // Change or remove completely transition and instantly hide the form
         // var addRecipeForm = document.getElementById('add-recipe-form');
@@ -110,7 +122,7 @@ export class RecipeForm extends Component {
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}
+            <form onSubmit={e => this.handleSubmit(e, this.props.recipe.id)}
                   id="add-recipe-form"
                   className="add-recipe-form">
                 <fieldset>

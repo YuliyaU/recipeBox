@@ -14,6 +14,7 @@ export class Recipe extends Component {
 
         this.handleDelete = this.handleDelete.bind(this);
         this.openEditForm = this.openEditForm.bind(this);
+        this.closeEditForm = this.closeEditForm.bind(this);
     }
 
     handleDelete(e, recipeId) {
@@ -24,6 +25,12 @@ export class Recipe extends Component {
         this.setState({
             isEditModeActive: true
         }, () => console.log(this.state.isEditModeActive));
+    }
+
+    closeEditForm() {
+        this.setState({
+            isEditModeActive: false
+        }, () => console.log(this.state.isEditModeActive))
     }
 
     render() {
@@ -44,7 +51,9 @@ export class Recipe extends Component {
                     {this.state.isEditModeActive ? 
                         <RecipeForm recipe={this.props.recipe}
                                     isEditMode={this.state.isEditMode}
-                                    isEditModeActive={this.state.isEditModeActive}/> : null}
+                                    isEditModeActive={this.state.isEditModeActive}
+                                    editRecipe={this.props.editRecipe}
+                                    closeEditForm={this.closeEditForm}/> : null}
                 </div>
             </li>
         );

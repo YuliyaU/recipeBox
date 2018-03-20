@@ -23,6 +23,7 @@ export class RecipiesUIContainer extends Component {
         }
 
         this.addNewRecipe = this.addNewRecipe.bind(this);
+        this.editRecipe = this.editRecipe.bind(this);
         this.deleteRecipe = this.deleteRecipe.bind(this);
     }
 
@@ -32,6 +33,18 @@ export class RecipiesUIContainer extends Component {
                 ...this.state.recipies,
                 newRecipe
             ]
+        }, () => console.log(this.state.recipies));
+    }
+
+    editRecipe(recipeId, editedRecipe) {
+        var newRecipiesArr = this.state.recipies;
+        for (var i = 0; i < newRecipiesArr.length; i += 1) {
+            if (newRecipiesArr[i]['id'] === recipeId) {
+                newRecipiesArr[i] = editedRecipe;
+            }
+        }
+        this.setState({
+            recipies: newRecipiesArr
         }, () => console.log(this.state.recipies));
     }
 
@@ -53,7 +66,8 @@ export class RecipiesUIContainer extends Component {
         return (
             <div className="ui-container">
                 <RecipesList recipies={this.state.recipies}
-                             onRecipeDelete={this.deleteRecipe} />
+                             onRecipeDelete={this.deleteRecipe}
+                             editRecipe={this.editRecipe} />
                 <AddRecipe onNewRecipe={this.addNewRecipe}/>
             </div>
         );
