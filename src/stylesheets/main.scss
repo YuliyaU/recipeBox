@@ -61,12 +61,17 @@ footer {
     font-size: 0.8rem;
 }
 
+.recipe-form {
+    text-align: left;
+}
+
 .add-ingredient {
     display: inline-block;
 }
 
 .added-ingredient {
-    margin-right: 0.5rem; 
+    display: inline-block;
+    margin: 0.1rem 0.5rem 0.1rem 0; 
     padding: 0.5rem;
     border-width: 1px;
     border-style: solid;
@@ -83,14 +88,14 @@ footer {
 //     overflow: hidden;
 // }
 
-// #add-recipe-form/*, .recipe-info*/ {
+// #recipe-form/*, .recipe-info*/ {
 //     max-height: 0;
 //     margin: 0;
 //     overflow: hidden;
 //     transition: max-height 1.0s linear;    
 // }
 
-// #add-recipe-form.unhid {
+// #recipe-form.unhid {
 //     max-height: 300px;
 //     margin: inherit;
 //     overflow: none;

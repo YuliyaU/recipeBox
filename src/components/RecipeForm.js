@@ -110,6 +110,12 @@ export class RecipeForm extends Component {
         this.setState({
             addedIngredients: []
         });
+
+        if (this.props.isEditMode) {
+            this.props.closeEditForm();
+        } else {
+            this.props.closeAddRecipeForm();
+        }
     }
     componentWillMount() {
         if (this.props.isEditModeActive) {
@@ -123,10 +129,10 @@ export class RecipeForm extends Component {
     render() {
         return (
             <form onSubmit={e => this.handleSubmit(e, this.props.recipe.id)}
-                  id="add-recipe-form"
-                  className="add-recipe-form">
+                  id="recipe-form"
+                  className="recipe-form">
                 <fieldset>
-                    <legend>Add New Recipe</legend>
+                    <legend>{this.props.isEditMode ? 'Edit Recipe' : 'Add New Recipe'}</legend>
                     <div>
                         {this.props.isEditMode ? 
                             <input type="text"
