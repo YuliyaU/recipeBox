@@ -48,14 +48,16 @@ export class RecipeForm extends Component {
 
         recipeName.value = '';
         this.setState({
-            addedIngredients: []
+            addedIngredients: [],
         });
 
+        this.props.closeAddRecipeForm();
+
         // Change or remove completely transition and instantly hide the form
-        var addRecipeForm = document.getElementById('add-recipe-form');
-        if (addRecipeForm.classList.contains('unhid')) {
-            addRecipeForm.classList.remove('unhid');
-        }
+        // var addRecipeForm = document.getElementById('add-recipe-form');
+        // if (addRecipeForm.classList.contains('unhid')) {
+        //     addRecipeForm.classList.remove('unhid');
+        // }
     }
 
     generateId() {

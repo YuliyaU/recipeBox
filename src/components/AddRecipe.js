@@ -6,18 +6,29 @@ export class AddRecipe extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            isEditMode: false
+            isEditMode: false,
+            isAddRecipeMode: false
         }
         
         this.handleAddRecipeClick = this.handleAddRecipeClick.bind(this);
+        this.closeAddRecipeForm = this.closeAddRecipeForm.bind(this);
     }
 
     // Show a form above all other elements and slide it to the top of the up
     handleAddRecipeClick() {
-        var addRecipeForm = document.getElementById('add-recipe-form');
-        if (!addRecipeForm.classList.contains('unhid')) {
-            addRecipeForm.classList.add('unhid');
-        }
+        // var addRecipeForm = document.getElementById('add-recipe-form');
+        // if (!addRecipeForm.classList.contains('unhid')) {
+        //     addRecipeForm.classList.add('unhid');
+        // }
+        this.setState({
+            isAddRecipeMode: true
+        });
+    }
+
+    closeAddRecipeForm() {
+        this.setState({
+            isAddRecipeMode: false
+        }, () => {console.log(this.state.isAddRecipeMode)});
     }
 
     render() {
@@ -27,8 +38,10 @@ export class AddRecipe extends Component {
                 <button onClick={this.handleAddRecipeClick}>
                     <TiPlus />
                 </button><span className="btn-tip">Add a Recipe</span>
-                <RecipeForm isEditMode={this.state.isEditMode}
-                            onNewRecipe={this.props.onNewRecipe}/>
+                {this.state.isAddRecipeMode ? 
+                    <RecipeForm isEditMode={this.state.isEditMode}
+                                onNewRecipe={this.props.onNewRecipe}
+                                closeAddRecipeForm={this.closeAddRecipeForm}/> : null}
             </div>
         );
     }

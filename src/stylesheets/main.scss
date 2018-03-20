@@ -75,15 +75,15 @@ footer {
 //     overflow: hidden;
 // }
 
-#add-recipe-form, .recipe-info {
-    max-height: 0;
-    margin: 0;
-    overflow: hidden;
-    transition: max-height 1.0s linear;    
-}
+// #add-recipe-form/*, .recipe-info*/ {
+//     max-height: 0;
+//     margin: 0;
+//     overflow: hidden;
+//     transition: max-height 1.0s linear;    
+// }
 
-#add-recipe-form.unhid {
-    max-height: 300px;
-    margin: inherit;
-    overflow: none;
-}
+// #add-recipe-form.unhid {
+//     max-height: 300px;
+//     margin: inherit;
+//     overflow: none;
+// }

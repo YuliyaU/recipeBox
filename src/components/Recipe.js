@@ -1,4 +1,5 @@
 import {Ingredient} from './Ingredient';
+import {RecipeForm} from './RecipeForm';
 import TiEdit from 'react-icons/lib/ti/edit';
 import TiTrash from 'react-icons/lib/ti/trash';
 
@@ -19,6 +20,7 @@ export const Recipe = ({recipe, onRecipeDelete}) => {
                 <span className="recipe-controls__item"><TiEdit /></span>
                 <span className="recipe-controls__item"
                       onClick={e => handleDelete(e, recipe.id)}><TiTrash /></span>
+                {/* <RecipeForm recipe={recipe}/> */}
             </div>
         </li>
     );
