@@ -30,7 +30,7 @@ module.exports = {
                               "type": "string"
                             }
                           },
-                          required: ["ingredientName"]
+                          required: ["ingredientId", "ingredientName"]
                         }
                     }                    
                 },

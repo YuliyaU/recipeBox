@@ -1,6 +1,6 @@
 import TiTimes from 'react-icons/lib/ti/times';
 
-export const IngredientPill = ({ingredient, isEditMode, onDeleteIngredient}) => {
+export const IngredientPill = ({ingredient, onDeleteIngredient}) => {
     return (
         <span className="added-ingredient">
             {ingredient.ingredientName} 

@@ -99,6 +99,13 @@ export class RecipeForm extends Component {
             addedIngredients: []
         });
     }
+    componentWillMount() {
+        if (this.props.isEditModeActive) {
+            this.setState({
+                addedIngredients: this.props.recipe.ingredients
+            }, () => console.log(this.state.addedIngredients));
+        }
+    }
 
 
     render() {
@@ -109,16 +116,19 @@ export class RecipeForm extends Component {
                 <fieldset>
                     <legend>Add New Recipe</legend>
                     <div>
-                        <input type="text"
-                               placeholder="Recipe Name"
-                               ref="_recipeName" />
+                        {this.props.isEditMode ? 
+                            <input type="text"
+                                   ref="_recipeName"
+                                   defaultValue={this.props.recipe.recipeName} /> : 
+                            <input type="text"
+                                   placeholder="Recipe Name"
+                                   ref="_recipeName" />}
                     </div>
                     <div>
                         { this.state.addedIngredients ? 
                             this.state.addedIngredients.map(ingredient => 
                                 <IngredientPill key={ingredient.ingredientId}
                                                 ingredient={ingredient}
-                                                isEditMode={this.props.isEditMode}
                                                 onDeleteIngredient={this.onDeleteIngredient}/>) : null }
                         { this.state.isAddIngredientClicked ? 
                             <AddIngredient handleClick={this.handleClick}

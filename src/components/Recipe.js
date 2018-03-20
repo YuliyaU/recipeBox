@@ -1,27 +1,52 @@
+import {Component} from 'react';
 import {Ingredient} from './Ingredient';
 import {RecipeForm} from './RecipeForm';
 import TiEdit from 'react-icons/lib/ti/edit';
 import TiTrash from 'react-icons/lib/ti/trash';
 
-export const Recipe = ({recipe, onRecipeDelete}) => {
-    const handleDelete = (e, recipeId) => {
-        onRecipeDelete(recipeId);
+export class Recipe extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            isEditMode: true,
+            isEditModeActive: false
+        }
+
+        this.handleDelete = this.handleDelete.bind(this);
+        this.openEditForm = this.openEditForm.bind(this);
     }
 
+    handleDelete(e, recipeId) {
+        this.props.onRecipeDelete(recipeId);
+    }
+
+    openEditForm() {
+        this.setState({
+            isEditModeActive: true
+        }, () => console.log(this.state.isEditModeActive));
+    }
+
+    render() {
+
     // Show a recipe item onClick
-    return (
-        <li className="recipe-block">
-            <div>{recipe.recipeName ? recipe.recipeName : 'Untitled Recipe'}</div>
-            <ul className="recipe-info">{recipe.ingredients ? recipe.ingredients.map((ingredient, index) => 
-                    <Ingredient key={index}
-                                ingredient={ingredient}/>) : 
-                    'There is no ingredients'}</ul>
-            <div className="recipe-controls">
-                <span className="recipe-controls__item"><TiEdit /></span>
-                <span className="recipe-controls__item"
-                      onClick={e => handleDelete(e, recipe.id)}><TiTrash /></span>
-                {/* <RecipeForm recipe={recipe}/> */}
-            </div>
-        </li>
-    );
+        return (
+            <li className="recipe-block">
+                <div>{this.props.recipe.recipeName ? this.props.recipe.recipeName : 'Untitled Recipe'}</div>
+                <ul className="recipe-info">{this.props.recipe.ingredients ? 
+                    this.props.recipe.ingredients.map(ingredient => 
+                        <Ingredient key={ingredient.ingredientId}
+                                    ingredient={ingredient}/>) : 'There is no ingredients'}</ul>
+                <div className="recipe-controls">
+                    <span className="recipe-controls__item"
+                          onClick={this.openEditForm}><TiEdit /></span>
+                    <span className="recipe-controls__item"
+                        onClick={e => this.handleDelete(e, this.props.recipe.id)}><TiTrash /></span>
+                    {this.state.isEditModeActive ? 
+                        <RecipeForm recipe={this.props.recipe}
+                                    isEditMode={this.state.isEditMode}
+                                    isEditModeActive={this.state.isEditModeActive}/> : null}
+                </div>
+            </li>
+        );
+    }
 }
