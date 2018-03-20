@@ -13,6 +13,7 @@ export class RecipeForm extends Component {
 
         this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.generateId = this.generateId.bind(this);
         this.onCancel = this.onCancel.bind(this);
     }
 
@@ -40,7 +41,7 @@ export class RecipeForm extends Component {
         console.log('refs value ' + recipeName.value);
 
         this.props.onNewRecipe({
-            id: recipeName.value + Math.floor(Math.random() * recipeName.value.length),
+            id: this.generateId(),
             recipeName: recipeName.value,
             ingredients: this.state.addedIngredients
         });
@@ -55,6 +56,12 @@ export class RecipeForm extends Component {
         if (addRecipeForm.classList.contains('unhid')) {
             addRecipeForm.classList.remove('unhid');
         }
+    }
+
+    generateId() {
+        var date = Date.now().toString(),
+            id = date + Math.random().toFixed(3).toString();
+        return id;
     }
 
     // A bag (fixed):
