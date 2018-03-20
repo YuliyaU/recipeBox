@@ -1,11 +1,15 @@
+import TiTick from 'react-icons/lib/ti/tick';
+
 export const AddIngredient = (props) => {
-    var ingredient = {ingredientName: ''};
+    var ingredient = {
+            ingredientId: '',
+            ingredientName: ''
+        };
 
     const handleChange = (e) => {        
         var inputValue = e.target.value;
-        // console.log('input value ' + inputValue);
+        ingredient['ingredientId'] = props.generateId();
         ingredient['ingredientName'] = inputValue;
-        // console.log(ingredient);
         return ingredient;
     }
 
@@ -14,7 +18,7 @@ export const AddIngredient = (props) => {
             <input type="text"
                     placeholder="Ingredient"
                     onChange={e => handleChange(e)} />
-            <button onClick={e => props.handleClick(e, ingredient)}>v</button>
+            <button onClick={e => props.handleClick(e, ingredient)}><TiTick /></button>
         </div>        
     );
 }

@@ -21,11 +21,16 @@ module.exports = {
                         "items": {
                           "type": "object",
                           "properties": {
+                            "ingredientId": {
+                                "type": "number",
+                                "unique": true,
+                                "minimum": 1
+                            },
                             "ingredientName": {
                               "type": "string"
                             }
                           },
-                          required: ["ingredientName"]
+                          required: ["ingredientId", "ingredientName"]
                         }
                     }                    
                 },

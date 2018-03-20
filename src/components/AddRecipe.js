@@ -1,91 +1,47 @@
 import {Component} from 'react';
-import {AddIngredientBtn} from './AddIngredientBtn';
-import {AddIngredient} from './AddIngredient';
-import {Ingredient} from './Ingredient';
-import {IngredientPill} from './IngredientPill';
+import {RecipeForm} from './RecipeForm';
+import TiPlus from 'react-icons/lib/ti/plus';
 
 export class AddRecipe extends Component {
     constructor(props) {
         super(props) 
         this.state = {
-            isAddIngredientClicked: false,
-            addedIngredients: []
+            isEditMode: false,
+            isAddRecipeMode: false
         }
-         
-        this.handleClick = this.handleClick.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
-        this.onCancel = this.onCancel.bind(this);
-    }
-
-    handleClick(e, ingredient) {               
-        if (this.state.isAddIngredientClicked) {
-            console.log(ingredient);            
-            this.setState({
-                addedIngredients: [
-                    ...this.state.addedIngredients,
-                    ingredient
-                ],
-                isAddIngredientClicked: false
-            }, () => console.log(this.state.addedIngredients));
-        } else {
-            this.setState({
-                isAddIngredientClicked: true
-            });
-        }
-    }
-
-    handleSubmit(e) {
-        e.preventDefault();   
         
-        var recipeName = this.refs._recipeName;
-        console.log('refs value ' + recipeName.value);
+        this.handleAddRecipeClick = this.handleAddRecipeClick.bind(this);
+        this.closeAddRecipeForm = this.closeAddRecipeForm.bind(this);
+    }
 
-        this.props.onNewRecipe({
-            id: Math.floor(Math.random * this.state.addedIngredients.length),
-            recipeName: recipeName.value,
-            ingredients: this.state.addedIngredients
-        });
-
-        recipeName.value = '';
+    // Show a form above all other elements and slide it to the top of the up
+    handleAddRecipeClick() {
+        // var addRecipeForm = document.getElementById('add-recipe-form');
+        // if (!addRecipeForm.classList.contains('unhid')) {
+        //     addRecipeForm.classList.add('unhid');
+        // }
         this.setState({
-            addedIngredients: []
+            isAddRecipeMode: true
         });
     }
 
-    onCancel() {
-        var recipeName = this.refs._recipeName;
-        recipeName.value = '';
+    closeAddRecipeForm() {
         this.setState({
-            addedIngredients: []
-        });
+            isAddRecipeMode: false
+        }, () => {console.log(this.state.isAddRecipeMode)});
     }
 
     render() {
         var _recipeName = '';
         return (
             <div>
-                <button>+</button><span className="btn-tip">Add a Recipe</span>
-                <h2>Add New Recipe</h2>
-                <form onSubmit={this.handleSubmit}>
-                    <div>
-                        <input type="text"
-                               placeholder="Recipe Name"
-                               ref="_recipeName" />
-                    </div>
-                    <div>
-                        { this.state.addedIngredients ? 
-                            this.state.addedIngredients.map((ingredient, index) => 
-                                <IngredientPill key={index}
-                                                ingredient={ingredient}/>) : null }
-                        { this.state.isAddIngredientClicked ? 
-                            <AddIngredient handleClick={this.handleClick}/> : 
-                            <AddIngredientBtn handleClick={this.handleClick}/> }
-                    </div>
-                    <div>
-                        <button onClick={this.onCancel}>Cancel</button>
-                        <button type="submit">Save the Recipe</button>
-                    </div>                
-                </form>
+                <button onClick={this.handleAddRecipeClick}>
+                    <TiPlus />
+                </button><span className="btn-tip">Add a Recipe</span>
+                {this.state.isAddRecipeMode ? 
+                    <RecipeForm isEditMode={this.state.isEditMode}
+                                onNewRecipe={this.props.onNewRecipe}
+                                closeAddRecipeForm={this.closeAddRecipeForm}/> : null}
             </div>
         );
     }

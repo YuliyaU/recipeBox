@@ -12,9 +12,9 @@ $neutralColor: #bbb;
 
 /*** 1. CSS Reset ***/
 
-h2 {
-    font-size: 1.8rem;
-}
+// h2 {
+//     font-size: 1.8rem;
+// }
 
 footer {
     padding: 2.0rem 0;
@@ -42,6 +42,16 @@ footer {
     list-style-type: none;
 }
 
+.recipe-controls {
+    text-align: right;
+
+    &__item {
+        padding: 0.5rem;    
+        font-size: 1.5rem;
+        cursor: pointer;
+    }    
+}
+
 .btn-tip {
     padding: 0 0.5rem;
     font-size: 0.8rem;
@@ -57,4 +67,27 @@ footer {
     border-width: 1px;
     border-style: solid;
     border-color: $neutralColor;
+
+    &__controls {
+        cursor: pointer;
+    }
 }
+
+// .hidden {
+//     height: 0;
+//     margin: 0;
+//     overflow: hidden;
+// }
+
+// #add-recipe-form/*, .recipe-info*/ {
+//     max-height: 0;
+//     margin: 0;
+//     overflow: hidden;
+//     transition: max-height 1.0s linear;    
+// }
+
+// #add-recipe-form.unhid {
+//     max-height: 300px;
+//     margin: inherit;
+//     overflow: none;
+// }
