@@ -1,6 +1,7 @@
 import {Component} from 'react';
 import {RecipesList} from './RecipiesList';
 import {AddRecipe} from './AddRecipe';
+import {getRecipies} from '../api/api';
 
 export class RecipiesUIContainer extends Component {
     constructor(props) {
@@ -60,6 +61,14 @@ export class RecipiesUIContainer extends Component {
                 console.log('The recipe is not found')
             }
         }
+    }
+
+    componentWillMount() {
+        getRecipies().then(results => {
+            this.setState({
+                recipies: results
+            });
+        });
     }
 
     render() {

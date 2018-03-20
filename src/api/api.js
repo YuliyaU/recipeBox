@@ -9,11 +9,11 @@ const baseUrl = getBaseUrl();
 // // - Redux + calls to mock data (DB) 
 // - FCC: calls to local storage
 
-export function getRecepies() {
-    return get('recepies');
+export function getRecipies() {
+    return get('recipies');
 }
 
-export function deleteRecepe(id) {
+export function deleteRecipe(id) {
     return del(`recepies/${id}`);
 }
 
