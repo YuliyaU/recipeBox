@@ -118,17 +118,23 @@ export class RecipeForm extends Component {
         }
     }
     componentWillMount() {
-        if (this.props.isEditModeActive) {
+        if (this.props.isEditModeActive && this.props.isEditMode) {
             this.setState({
                 addedIngredients: this.props.recipe.ingredients
-            }, () => console.log(this.state.addedIngredients));
+            });
         }
     }
 
 
     render() {
+        var recipeId = '';
+        if (this.props.isEditMode) {
+            recipeId = this.props.recipe.id;
+        } else {
+            recipeId = '';
+        }
         return (
-            <form onSubmit={e => this.handleSubmit(e, this.props.recipe.id)}
+            <form onSubmit={e => this.handleSubmit(e, recipeId)}
                   id="recipe-form"
                   className="recipe-form">
                 <fieldset>
