@@ -39,10 +39,9 @@ export class RecipeForm extends Component {
         e.preventDefault();   
         
         var recipeName = this.refs._recipeName;
-        console.log('refs value ' + recipeName.value);
 
         if (recipeId) {
-            this.props.editRecipe(recipeId, {
+            this.props.editRecipe({
                 id: recipeId,
                 recipeName: recipeName.value,
                 ingredients: this.state.addedIngredients
@@ -66,7 +65,9 @@ export class RecipeForm extends Component {
             this.props.closeAddRecipeForm();
         }        
 
-        // Change or remove completely transition and instantly hide the form
+        // Note: Change or remove completely transition and instantly hide the form
+
+        // Adds transition to the form display
         // var addRecipeForm = document.getElementById('add-recipe-form');
         // if (addRecipeForm.classList.contains('unhid')) {
         //     addRecipeForm.classList.remove('unhid');
@@ -81,16 +82,20 @@ export class RecipeForm extends Component {
 
     onDeleteIngredient(e, ingredientId) {
         var newIngredientsArr = this.state.addedIngredients;
+        var msg = '';
         for (var i = 0; i < newIngredientsArr.length; i += 1) {
             if (newIngredientsArr[i]['ingredientId'] == ingredientId) {
                 newIngredientsArr.splice(i, 1);
                 this.setState({
                     addedIngredients: newIngredientsArr
                 }, () => console.log(this.state.addedIngredients));
+                msg = 'The ingredient is found.'
+                break;
             } else {
-                console.log("The ingredient wasn't found.");
+                msg = "The ingredient wasn't found.";
             }
         }
+        console.log(msg);
     }
 
     // A bag (fixed):
@@ -117,6 +122,7 @@ export class RecipeForm extends Component {
             this.props.closeAddRecipeForm();
         }
     }
+    
     componentWillMount() {
         if (this.props.isEditModeActive && this.props.isEditMode) {
             this.setState({
@@ -124,7 +130,6 @@ export class RecipeForm extends Component {
             });
         }
     }
-
 
     render() {
         var recipeId = '';

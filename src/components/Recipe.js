@@ -45,7 +45,8 @@ export class Recipe extends Component {
 
     // Show a recipe item onClick
         return (
-            <li className="recipe-block">
+            <li className="recipe-block"
+                id={this.props.recipe.id}>
                 <div onClick={this.expandRecipe}
                      className="recipe-title">
                     {this.props.recipe.recipeName ? this.props.recipe.recipeName : 'Untitled Recipe'}

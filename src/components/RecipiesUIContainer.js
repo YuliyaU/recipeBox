@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {RecipesList} from './RecipiesList';
 import {AddRecipe} from './AddRecipe';
-import {getRecipies} from '../api/api';
+import {getRecipies, deleteRecipe, editRecipe} from '../api/api';
 
 export class RecipiesUIContainer extends Component {
     constructor(props) {
@@ -25,7 +25,7 @@ export class RecipiesUIContainer extends Component {
 
         this.addNewRecipe = this.addNewRecipe.bind(this);
         this.editRecipe = this.editRecipe.bind(this);
-        this.deleteRecipe = this.deleteRecipe.bind(this);
+        this.onDeleteRecipe = this.onDeleteRecipe.bind(this);
     }
 
     addNewRecipe(newRecipe) {
@@ -37,30 +37,20 @@ export class RecipiesUIContainer extends Component {
         }, () => console.log(this.state.recipies));
     }
 
-    editRecipe(recipeId, editedRecipe) {
-        var newRecipiesArr = this.state.recipies;
-        for (var i = 0; i < newRecipiesArr.length; i += 1) {
-            if (newRecipiesArr[i]['id'] === recipeId) {
-                newRecipiesArr[i] = editedRecipe;
-            }
-        }
-        this.setState({
-            recipies: newRecipiesArr
-        }, () => console.log(this.state.recipies));
+    editRecipe(editedRecipe) {
+        editRecipe(editedRecipe);
     }
 
-    deleteRecipe(id) {
-        var newRecipiesArr = this.state.recipies;
-        for (var i = 0; i < newRecipiesArr.length; i += 1) {
-            if (newRecipiesArr[i]['id'] == id) {
-                newRecipiesArr.splice(i, 1);
-                this.setState({
-                    recipies: newRecipiesArr
-                }, () => console.log(this.state.recipies))
-            } else {
-                console.log('The recipe is not found')
-            }
-        }
+    onDeleteRecipe(id) {
+
+        // Bag: There is a delay in a state update without el.remove()
+        
+        deleteRecipe(id);
+
+        var recipeToRemove = document.getElementById(id);
+        recipeToRemove.remove();
+        
+        // window.location.reload(true);
     }
 
     componentWillMount() {
@@ -75,7 +65,7 @@ export class RecipiesUIContainer extends Component {
         return (
             <div className="ui-container">
                 <RecipesList recipies={this.state.recipies}
-                             onRecipeDelete={this.deleteRecipe}
+                             onRecipeDelete={this.onDeleteRecipe}
                              editRecipe={this.editRecipe} />
                 <AddRecipe onNewRecipe={this.addNewRecipe}/>
             </div>
