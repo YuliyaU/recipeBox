@@ -26,6 +26,8 @@ export class RecipiesUIContainer extends Component {
         this.addNewRecipe = this.addNewRecipe.bind(this);
         this.editRecipe = this.editRecipe.bind(this);
         this.onDeleteRecipe = this.onDeleteRecipe.bind(this);
+
+        this.loadRecipies = this.loadRecipies.bind(this);
     }
 
     addNewRecipe(newRecipe) {
@@ -37,28 +39,37 @@ export class RecipiesUIContainer extends Component {
         }, () => console.log(this.state.recipies));
     }
 
+    loadRecipies() {
+        getRecipies()
+            .then(res => {
+                this.setState({
+                    recipies: res
+                });
+            }).catch(err => console.log(err))
+    }
+
+    // Note: Look into updating only one item 
+    // without getting the whole list of items
+
     editRecipe(editedRecipe) {
-        editRecipe(editedRecipe);
+        editRecipe(editedRecipe).then(() => {
+            // Fetch items back with a callback function
+            this.loadRecipies()
+            }).catch(err => console.log(err));;
     }
 
     onDeleteRecipe(id) {
-
-        // Bag: There is a delay in a state update without el.remove()
-        
-        deleteRecipe(id);
-
-        var recipeToRemove = document.getElementById(id);
-        recipeToRemove.remove();
-        
-        // window.location.reload(true);
+        // Asynchronous calls
+        // Delete an item        
+        deleteRecipe(id)
+            .then(() => {
+                // Fetch left items with a callback function
+                this.loadRecipies()
+            }).catch(err => console.log(err));
     }
 
     componentWillMount() {
-        getRecipies().then(results => {
-            this.setState({
-                recipies: results
-            });
-        });
+        this.loadRecipies()
     }
 
     render() {
