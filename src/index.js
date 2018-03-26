@@ -3,7 +3,7 @@ import initialState from './initialState.json';
 import appReducer from './store/reducers';
 import {createStore} from 'redux';
 
-const store = createStore(appReducer);
+const store = createStore(appReducer, initialState);
 
 console.log('initial state', store.getState());
 
