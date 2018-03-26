@@ -1,36 +1,34 @@
-// We don't need C as we will use action creators
-//import C from './constants';
+import C from './constants';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import sampleData from './initialState.json';
 // Bacause it's index file under the store folder we can use:
 import storeFactory from './store';
-import {addRecipe, deleteRecipe, setIsEditMode} from './actions';
+import {Provider} from 'react-redux';
+import {App} from '../src/components/ui/App';
+import {getRecipies} from './api/api';
 
-const store = storeFactory();
+// const initialState = sampleData;
+// const store = storeFactory(initialState);
 
-store.dispatch(
-    addRecipe(365558.83417074627, 'commodo do', [{
-        "ingredientId":8704752.485715887,
-        "ingredientName":"ea irure"
-    }, {
-        "ingredientId":61364703.937548354,
-        "ingredientName":"voluptate qui irure enim"
-    }])
+const store = storeFactory(sampleData);
+
+console.log(store.getState());
+
+store.subscribe(() => {
+    console.log(`
+        state
+        =============
+        ${store.getState()}
+    `);
+});
+
+window.React = React;
+window.store = store;
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>, 
+    document.getElementById('root')
 );
-
-store.dispatch(
-    deleteRecipe(365558.83417074627)
-);
-
-store.dispatch(
-    setIsEditMode()
-);
-
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import {App} from '../src/components/App';
-
-// window.React = React;
-
-// ReactDOM.render(
-//     <App />, 
-//     document.getElementById('root')
-// );

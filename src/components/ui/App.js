@@ -1,5 +1,5 @@
-import { RecipiesUIContainer } from './RecipiesUIContainer';
-import '../stylesheets/main.scss';
+import RecipiesUIContainer from './RecipiesUIContainer';
+import '../../stylesheets/main.scss';
 
 export const App = () => {
     return(
