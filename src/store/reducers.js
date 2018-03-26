@@ -1,4 +1,5 @@
 import C from '../constants';
+import {combineReducers} from 'redux';
 
 export const recipe = (state = null, action) => 
     (action.type === C.ADD_RECIPE) ? 
@@ -44,3 +45,10 @@ export const addedIngredients = (state = [], action) => {
             return state;
     }
 }
+
+export default combineReducers({
+    recipe,
+    recipies,
+    isEditMode,
+    addedIngredients
+});
