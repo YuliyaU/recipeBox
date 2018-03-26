@@ -7,6 +7,11 @@ const store = createStore(appReducer);
 
 store.subscribe(() => console.log(store.getState()));
 
+store.subscribe(() => {
+    const state = JSON.stringify(store.getState());
+    localStorage['redux-store'] = state;
+});
+
 store.dispatch({
     type: C.ADD_RECIPE,
     payload: {
