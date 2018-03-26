@@ -1,24 +1,13 @@
 import C from './constants';
 import initialState from './initialState.json';
 import appReducer from './store/reducers';
+import {createStore} from 'redux';
 
-// Building a reducer
+const store = createStore(appReducer);
 
-var state = initialState;
+console.log('initial state', store.getState());
 
-console.log(`
-    Initial state
-    =============
-    recipies ${JSON.stringify(state.recipies)}
-    isEditMode ${state.isEditMode}
-`);
-
-state = appReducer(state, {
-    type: C.SET_ISEDITMODE,
-    payload: true
-});
-
-state = appReducer(state, {
+store.dispatch({
     type: C.ADD_RECIPE,
     payload: {
         "id":365558.83417074627,
@@ -33,12 +22,7 @@ state = appReducer(state, {
     }
 });
 
-console.log(`
-    Next state
-    =============
-    recipies ${JSON.stringify(state.recipies)}
-    isEditMode ${state.isEditMode}
-`);
+console.log('next state', store.getState());
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';
