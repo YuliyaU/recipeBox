@@ -1,11 +1,11 @@
 import C from './constants';
-import initialState from './initialState.json';
+// import initialState from './initialState.json';
 import appReducer from './store/reducers';
 import {createStore} from 'redux';
 
-const store = createStore(appReducer, initialState);
+const store = createStore(appReducer);
 
-console.log('initial state', store.getState());
+store.subscribe(() => console.log(store.getState()));
 
 store.dispatch({
     type: C.ADD_RECIPE,
@@ -22,7 +22,12 @@ store.dispatch({
     }
 });
 
-console.log('next state', store.getState());
+store.dispatch({
+    type: C.SET_ISEDITMODE,
+    payload: true
+});
+
+// console.log('next state', store.getState());
 
 // import React from 'react';
 // import ReactDOM from 'react-dom';
