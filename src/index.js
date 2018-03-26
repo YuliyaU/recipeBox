@@ -3,7 +3,13 @@ import C from './constants';
 import appReducer from './store/reducers';
 import {createStore} from 'redux';
 
-const store = createStore(appReducer);
+const initialState = (localStorage['redux-store']) ? 
+    JSON.parse(localStorage['redux-store']) : {};
+
+const store = createStore(appReducer, initialState);
+
+// For debugging in development, not production
+window.store = store;
 
 store.subscribe(() => console.log(store.getState()));
 
@@ -12,25 +18,25 @@ store.subscribe(() => {
     localStorage['redux-store'] = state;
 });
 
-store.dispatch({
-    type: C.ADD_RECIPE,
-    payload: {
-        "id":365558.83417074627,
-        "recipeName":"commodo do",
-        "ingredients":[{
-            "ingredientId":8704752.485715887,
-            "ingredientName":"ea irure"
-        }, {
-            "ingredientId":61364703.937548354,
-            "ingredientName":"voluptate qui irure enim"
-        }]
-    }
-});
+// store.dispatch({
+//     type: C.ADD_RECIPE,
+//     payload: {
+//         "id":365558.83417074627,
+//         "recipeName":"commodo do",
+//         "ingredients":[{
+//             "ingredientId":8704752.485715887,
+//             "ingredientName":"ea irure"
+//         }, {
+//             "ingredientId":61364703.937548354,
+//             "ingredientName":"voluptate qui irure enim"
+//         }]
+//     }
+// });
 
-store.dispatch({
-    type: C.SET_ISEDITMODE,
-    payload: true
-});
+// store.dispatch({
+//     type: C.SET_ISEDITMODE,
+//     payload: true
+// });
 
 // console.log('next state', store.getState());
 
