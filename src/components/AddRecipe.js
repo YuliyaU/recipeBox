@@ -35,9 +35,12 @@ export class AddRecipe extends Component {
         var _recipeName = '';
         return (
             <div>
-                <button onClick={this.handleAddRecipeClick}>
-                    <TiPlus />
-                </button><span className="btn-tip">Add a Recipe</span>
+                {!this.state.isAddRecipeMode ? 
+                    (<div>
+                        <button onClick={this.handleAddRecipeClick}>
+                            <TiPlus />
+                        </button><span className="btn-tip">Add a Recipe</span>
+                    </div>) : null}
                 {this.state.isAddRecipeMode ? 
                     <RecipeForm isEditMode={this.state.isEditMode}
                                 onNewRecipe={this.props.onNewRecipe}

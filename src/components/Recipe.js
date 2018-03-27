@@ -46,28 +46,30 @@ export class Recipe extends Component {
     // Show a recipe item onClick
         return (
             <li className="recipe-block">
-                <div onClick={this.expandRecipe}
-                     className="recipe-title">
-                    {this.props.recipe.recipeName ? this.props.recipe.recipeName : 'Untitled Recipe'}
-                </div>
+                {!this.state.isEditModeActive ?
+                    (<div onClick={this.expandRecipe}
+                        className="recipe-title">
+                        {this.props.recipe.recipeName ? this.props.recipe.recipeName : 'Untitled Recipe'}
+                    </div>) : null}
                 {this.state.isRecipeExpanded ?
-                <ul className="recipe-info">
-                    {this.props.recipe.ingredients ? 
-                        this.props.recipe.ingredients.map(ingredient => 
-                            <Ingredient key={ingredient.ingredientId}
-                                        ingredient={ingredient}/>) : 'There is no ingredients'}</ul> : null}
-                <div className="recipe-controls">
-                    <span className="recipe-controls__item"
-                          onClick={this.openEditForm}><TiEdit /></span>
-                    <span className="recipe-controls__item"
-                        onClick={e => this.handleDelete(e, this.props.recipe.id)}><TiTrash /></span>
-                    {this.state.isEditModeActive ? 
-                        <RecipeForm recipe={this.props.recipe}
-                                    isEditMode={this.state.isEditMode}
-                                    isEditModeActive={this.state.isEditModeActive}
-                                    editRecipe={this.props.editRecipe}
-                                    closeEditForm={this.closeEditForm}/> : null}
-                </div>
+                    <ul className="recipe-info">
+                        {this.props.recipe.ingredients ? 
+                            this.props.recipe.ingredients.map(ingredient => 
+                                <Ingredient key={ingredient.ingredientId}
+                                            ingredient={ingredient}/>) : 'There is no ingredients'}</ul> : null}
+                {!this.state.isEditModeActive ?
+                    (<div className="recipe-controls">
+                        <span className="recipe-controls__item"
+                            onClick={this.openEditForm}><TiEdit /></span>
+                        <span className="recipe-controls__item"
+                            onClick={e => this.handleDelete(e, this.props.recipe.id)}><TiTrash /></span>                    
+                    </div>) : null}
+                {this.state.isEditModeActive ? 
+                    <RecipeForm recipe={this.props.recipe}
+                                isEditMode={this.state.isEditMode}
+                                isEditModeActive={this.state.isEditModeActive}
+                                editRecipe={this.props.editRecipe}
+                                closeEditForm={this.closeEditForm}/> : null}
             </li>
         );
     }
