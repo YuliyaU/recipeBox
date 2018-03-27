@@ -1,39 +1,42 @@
-// API Example
-import 'whatwg-fetch';
-import getBaseUrl from '../../buildScripts/baseUrl';
-
-const baseUrl = getBaseUrl();
-
-// When UI would be ready, separate on three branches:
-// - Calls to mock data (DB)
-// // - Redux + calls to mock data (DB) 
-// - FCC: calls to local storage
-
-export function getRecepies() {
-    return get('recepies');
+export function getRecipes() {
+    var recipesLS = localStorage.getItem('recipes');
+    var recipes = JSON.parse(recipesLS);
+    console.log(recipes);
+    return recipes;
 }
 
-export function deleteRecepe(id) {
-    return del(`recepies/${id}`);
+export function createRecipe(newRecipe) {
+    var recipes = getRecipes();
+    if (recipes) {
+        recipes.push(newRecipe);
+    } else {
+        recipes = [];
+        recipes.push(newRecipe);
+    }
+    saveRecipesToLocalStorage(recipes);
 }
 
-function get(url) {
-    return fetch(baseUrl + url).then(onSuccess, onError);
+export function updateRecipes(editedRecipe) {
+    var recipes = getRecipes();
+    for (var i = 0; i < recipes.length; i += 1) {
+        if (String.toString(recipes[i]['id']) === String.toString(editedRecipe['id'])) {
+            recipes[i] = editedRecipe;
+        }
+    }
+    saveRecipesToLocalStorage(recipes);
 }
 
-// Can't call func delete since it's reserved word
-function del(url) {
-    const request = new Request(baseUrl + url, {
-        method: 'DELETE'
-    });
-    return fetch(request).then(onSuccess, onError);
+export function deleteRecipe(recipeId) {
+    var recipes = getRecipes();
+    for (var i = 0; i < recipes.length; i += 1) {
+        if (String.toString(recipes[i]['id']) === String.toString(recipeId)) {
+            recipes.splice(i, 1);
+        }
+    }
+    saveRecipesToLocalStorage(recipes);
 }
 
-function onSuccess(response) {
-    return response.json();
-}
-
-function onError(error) {
-    console.log(error);
-}
-
+function saveRecipesToLocalStorage(recipes) {
+    recipes = JSON.stringify(recipes);
+    localStorage.setItem('recipes', recipes);
+};

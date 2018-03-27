@@ -42,7 +42,7 @@ export class RecipeForm extends Component {
         console.log('refs value ' + recipeName.value);
 
         if (recipeId) {
-            this.props.editRecipe(recipeId, {
+            this.props.editRecipe({
                 id: recipeId,
                 recipeName: recipeName.value,
                 ingredients: this.state.addedIngredients
