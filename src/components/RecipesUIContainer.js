@@ -62,7 +62,7 @@ export class RecipesUIContainer extends Component {
 
     render() {
         return (
-            <div className="ui-container">
+            <div className="ui-container row twelve columns">
                 <RecipesList recipes={this.state.recipes}
                              onRecipeDelete={this.deleteRecipe}
                              editRecipe={this.editRecipe} />

@@ -31,7 +31,8 @@ export class Recipe extends Component {
 
     openEditForm() {
         this.setState({
-            isEditModeActive: true
+            isEditModeActive: true,
+            isRecipeExpanded: false
         });
     }
 
@@ -42,21 +43,32 @@ export class Recipe extends Component {
     }
 
     render() {
-
+        var hasIngredients = false;
+        if (this.props.recipe.ingredients) {
+            if (this.props.recipe.ingredients.length === 0) {
+                hasIngredients = false;
+            } else {
+                hasIngredients = true;
+            }
+        } else {
+            hasIngredients = false;
+        }
     // Show a recipe item onClick
         return (
             <li className="recipe-block">
                 {!this.state.isEditModeActive ?
                     (<div onClick={this.expandRecipe}
                         className="recipe-title">
-                        {this.props.recipe.recipeName ? this.props.recipe.recipeName : 'Untitled Recipe'}
+                        {this.props.recipe.recipeName ? this.props.recipe.recipeName : 
+                        'Untitled Recipe'}
                     </div>) : null}
                 {this.state.isRecipeExpanded ?
                     <ul className="recipe-info">
-                        {this.props.recipe.ingredients ? 
-                            this.props.recipe.ingredients.map(ingredient => 
+                        {hasIngredients ? 
+                            (this.props.recipe.ingredients.map(ingredient => 
                                 <Ingredient key={ingredient.ingredientId}
-                                            ingredient={ingredient}/>) : 'There is no ingredients'}</ul> : null}
+                                            ingredient={ingredient}/>)) : 
+                                'There is no ingredients'}</ul> : null}
                 {!this.state.isEditModeActive ?
                     (<div className="recipe-controls">
                         <span className="recipe-controls__item"
