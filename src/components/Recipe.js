@@ -68,7 +68,7 @@ export class Recipe extends Component {
                             (this.props.recipe.ingredients.map(ingredient => 
                                 <Ingredient key={ingredient.ingredientId}
                                             ingredient={ingredient}/>)) : 
-                                'There is no ingredients'}</ul> : null}
+                                'There is no ingredients. Edit the recipe and add some.'}</ul> : null}
                 {!this.state.isEditModeActive ?
                     (<div className="recipe-controls">
                         <span className="recipe-controls__item"

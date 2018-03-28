@@ -19,7 +19,7 @@ export const RecipesList = ({recipes, onRecipeDelete, editRecipe}) => {
                         recipe={recipe}
                         onRecipeDelete={onRecipeDelete}
                         editRecipe={editRecipe}/>
-            ) : 'There is no recipes yet.'}
+            ) : 'There is no recipes yet. Add some.'}
         </ul>
     );
 } 
