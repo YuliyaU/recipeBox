@@ -1,17 +1,27 @@
 import {Recipe} from './Recipe';
 
-const RecipiesList = ({recipies}) => {
+const RecipesList = ({recipes}) => {
+    var hasRecipes = false;    
+    if (recipes) {
+        if (recipes.length === 0) {
+            hasRecipes = false;
+        } else {
+            hasRecipes = true;
+        }        
+    } else {
+        hasRecipes = false;
+    }
     return (
         <ul>
-            {recipies.map(recipe => 
+            {hasRecipes ? recipes.map(recipe => 
                 <Recipe key={recipe.id}
                         recipe={recipe} />
-            )}
+            ) : 'There is no recipes. Add some.'}
         </ul>
     );
 };
  
-export default RecipiesList;
+export default RecipesList;
 
 // export const RecipesList = ({recipies, onRecipeDelete, editRecipe}) => {
 //     return (

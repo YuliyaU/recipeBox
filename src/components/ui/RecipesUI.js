@@ -1,16 +1,16 @@
 // import {Component} from 'react';
-import VisibleRecipiesList from '../containers/VisibleRecipiesList';
+import RecipesListContainer from '../containers/RecipesListContainer';
 import {AddRecipe} from './AddRecipe';
 // import {getRecipies, deleteRecipe, editRecipe} from '../../api/api';
 
-const RecipiesUIContainer = () => (
+const RecipesUIContainer = () => (
     <div className="ui-container">
-        <VisibleRecipiesList />
+        <RecipesListContainer />
         <AddRecipe />
     </div>
 );
 
-export default RecipiesUIContainer;
+export default RecipesUIContainer;
 
 // export class RecipiesUIContainer extends Component {
 //     constructor(props) {

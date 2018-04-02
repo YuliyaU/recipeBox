@@ -24,16 +24,16 @@ const consoleMessages = function (store) {
             // .groupCollapsed allows us to group all of the logs that are associated to
             // this action
             console.groupCollapsed(`dispatching action => ${action.type}`);
-            console.log(`recipies`, store.getState().recipies.length);
+            console.log(`recipes`, store.getState().recipes.length);
 
             // Here is where the action will be dispatched and the state will be changed
             result = next(action);
 
             // Getting a state after the action was dispatched
-            let {recipies, isEditMode, addedIngredients} = store.getState();
+            let {recipes, isEditMode, addedIngredients} = store.getState();
 
             console.log(`
-                recipies: ${recipies.length}
+                recipies: ${recipes.length}
                 isEditMode: ${isEditMode}
             `);
 

@@ -5,7 +5,7 @@ export const recipe = (state = null, action) =>
     (action.type === C.ADD_RECIPE) ? 
         action.payload : state;
 
-export const recipies = (state = [], action) => {
+export const recipes = (state = [], action) => {
     switch(action.type) {
         case C.ADD_RECIPE:
             const hasRecipe = state.some(recipe => {
@@ -48,7 +48,7 @@ export const addedIngredients = (state = [], action) => {
 
 export default combineReducers({
     recipe,
-    recipies,
+    recipes,
     isEditMode,
     addedIngredients
 });
