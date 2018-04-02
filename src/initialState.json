@@ -55,11 +55,5 @@
                 }
             ]
         }
-    ],
-    "isEditMode": false,
-    "addedIngredients": [],
-    "ingredientNames": {
-        "fetching": false,
-        "suggestions": ["tomato", "potato", "apple"]
-    }
+    ]
 }

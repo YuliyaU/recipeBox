@@ -1,3 +1,5 @@
+// Building a storeFactory
+
 import C from '../constants';
 import appReducer from './reducers';
 

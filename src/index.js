@@ -1,27 +1,31 @@
-import C from './constants';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import sampleData from './initialState.json';
-// Bacause it's index file under the store folder we can use:
-import storeFactory from './store';
-import {Provider} from 'react-redux';
-import {App} from '../src/components/ui/App';
-import {getRecipies} from './api/api';
+// Try to do it without storeFactory first.
 
-// const initialState = sampleData;
-// const store = storeFactory(initialState);
 
-const store = storeFactory(sampleData);
 
-console.log(store.getState());
+// import C from './constants';
+// import React from 'react';
+// import ReactDOM from 'react-dom';
+// import sampleData from './initialState.json';
+// // Bacause it's index file under the store folder we can use:
+// import storeFactory from './store';
+// import {Provider} from 'react-redux';
+// import {App} from '../src/components/ui/App';
+// import {getRecipies} from './api/api';
 
-store.subscribe(() => {
-    console.log(`
-        state
-        =============
-        ${store.getState()}
-    `);
-});
+// // const initialState = sampleData;
+// // const store = storeFactory(initialState);
+
+// const store = storeFactory(sampleData);
+
+// console.log(store.getState());
+
+// store.subscribe(() => {
+//     console.log(`
+//         state
+//         =============
+//         ${store.getState()}
+//     `);
+// });
 
 window.React = React;
 window.store = store;
