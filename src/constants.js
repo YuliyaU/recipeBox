@@ -1,5 +1,6 @@
 const constants = {
-    GET_RECIPES: 'GET_RECIPES'
+    REQUEST_RECIPES: 'REQUEST_RECIPES',
+    RECEIVE_RECIPES: 'RECEIVE_RECIPES'
 };
 
 export default constants;
