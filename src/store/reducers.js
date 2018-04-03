@@ -23,6 +23,16 @@ export const isRecipesFetching = (state = false, action) => {
     }
 }
 
+export const isAddRecipeFormOpen = (state = false, action) => {
+    switch (action.type) {
+        case C.OPEN_ADD_RECIPE_FORM:
+        case C.CLOSE_ADD_RECIPE_FORM:
+            return action.payload;
+        default:
+            return state;
+    }
+}
+
 // export const recipes = (
 //     state = {
 //         isRecipesFetching: false,
@@ -46,7 +56,8 @@ export const isRecipesFetching = (state = false, action) => {
 
 export default combineReducers({
     recipes,
-    isRecipesFetching
+    isRecipesFetching,
+    isAddRecipeFormOpen
 });
 
 // export default combineReducers({

@@ -29,3 +29,17 @@ export function fetchRecipes() {
                 json => dispatch(receiveRecipes(json)))
     }      
 }
+
+export function openAddRecipeForm() {
+    return {
+        type: C.OPEN_ADD_RECIPE_FORM,
+        payload: true
+    };
+}
+
+export function closeAddRecipeForm() {
+    return {
+        type: C.CLOSE_ADD_RECIPE_FORM,
+        payload: false
+    };
+}

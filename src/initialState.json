@@ -56,5 +56,6 @@
             ]
         }
     ],
-    "isRecipesFetching": false
+    "isRecipesFetching": false,
+    "isAddRecipeFormOpen": false
 }

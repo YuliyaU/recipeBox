@@ -1,12 +1,12 @@
 // import {Component} from 'react';
 import RecipesListContainer from '../containers/RecipesListContainer';
-import {AddRecipe} from './AddRecipe';
+import AddRecipeContainer from '../containers/AddRecipeContainer';
 // import {getRecipies, deleteRecipe, editRecipe} from '../../api/api';
 
 const RecipesUIContainer = () => (
     <div className="ui-container">
         <RecipesListContainer />
-        <AddRecipe />
+        <AddRecipeContainer />
     </div>
 );
 
