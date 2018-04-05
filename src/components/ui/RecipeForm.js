@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import {ManipulateIngredients} from './ManipulateIngredients';
 import {connect} from 'react-redux';
-import {closeAddRecipeForm, saveRecipe} from '../../actions';
+import {closeAddRecipeForm, saveRecipe, putRecipe} from '../../actions';
 
 class RecipeForm extends Component {
     constructor(props) {
@@ -24,7 +24,7 @@ class RecipeForm extends Component {
         var recipeName = this.refs._recipeName;
 
         if (recipeId) {
-            this.props.editRecipe({
+            this.props.onEditRecipe({
                 id: recipeId,
                 recipeName: recipeName.value,
                 ingredients: this.state.addedIngredients
@@ -104,6 +104,7 @@ class RecipeForm extends Component {
     }
     
     componentWillMount() {
+        console.log(this.props.isEditMode);
         if (this.props.isEditModeActive && this.props.isEditMode) {
             this.setState({
                 addedIngredients: this.props.recipe.ingredients
@@ -160,6 +161,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         closeAddRecipeForm: () => {
             dispatch(closeAddRecipeForm())
+        },
+        onEditRecipe: (recipe) => {
+            dispatch(putRecipe(recipe))
         }
     };
 }

@@ -13,6 +13,7 @@ export class Recipe extends Component {
         }
 
         this.expandRecipe = this.expandRecipe.bind(this);
+        this.editRecipe = this.editRecipe.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.openEditRecipeForm = this.openEditRecipeForm.bind(this);
         this.closeEditRecipeForm = this.closeEditRecipeForm.bind(this);
@@ -22,6 +23,10 @@ export class Recipe extends Component {
         this.setState({
             isRecipeExpanded: !this.state.isRecipeExpanded
         });
+    }
+
+    editRecipe(recipe) {
+
     }
 
     handleDelete(e, recipeId) {
@@ -57,14 +62,14 @@ export class Recipe extends Component {
                                         ingredient={ingredient}/>) : 'There is no ingredients'}</ul> : null}
                 <div className="recipe-controls">
                     <span className="recipe-controls__item"
-                          onClick={this.props.openEditRecipeForm}><TiEdit /></span>
+                          onClick={this.openEditRecipeForm}><TiEdit /></span>
                     <span className="recipe-controls__item"
                         onClick={e => this.handleDelete(e, this.props.recipe.id)}><TiTrash /></span>
                     {this.state.isEditModeActive ? 
                         <RecipeForm recipe={this.props.recipe}
-                                    isEditMode={this.state.isEditMode}
+                                    isEditMode={isEditMode}
                                     isEditModeActive={this.state.isEditModeActive}
-                                    editRecipe={this.props.editRecipe}
+                                    editRecipe={this.editRecipe}
                                     closeEditForm={this.closeEditRecipeForm}/> : null}
                 </div>
             </li>
