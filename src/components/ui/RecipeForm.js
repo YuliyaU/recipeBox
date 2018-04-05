@@ -104,7 +104,6 @@ class RecipeForm extends Component {
     }
     
     componentWillMount() {
-        console.log(this.props.isEditMode);
         if (this.props.isEditModeActive && this.props.isEditMode) {
             this.setState({
                 addedIngredients: this.props.recipe.ingredients

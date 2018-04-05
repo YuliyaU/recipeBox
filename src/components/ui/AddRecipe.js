@@ -8,11 +8,13 @@ const AddRecipe = ({isAddRecipeFormOpen, onAddRecipeBtnClick}) => {
 
     return (
         <div>
-            <button onClick={onAddRecipeBtnClick}>
-                <TiPlus />
-            </button><span className="btn-tip">Add a Recipe</span>
-            {isAddRecipeFormOpen ? 
-                <RecipeForm isEditMode={isEditMode} /> : null}
+            {!isAddRecipeFormOpen ?
+                <div>
+                    <button onClick={onAddRecipeBtnClick}>
+                        <TiPlus />
+                    </button><span className="btn-tip">Add a Recipe</span>
+                </div> :
+                <RecipeForm isEditMode={isEditMode} />}
         </div>
     );
     
