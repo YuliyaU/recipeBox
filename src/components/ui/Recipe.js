@@ -3,8 +3,10 @@ import {Ingredient} from './Ingredient';
 import RecipeForm from './RecipeForm';
 import TiEdit from 'react-icons/lib/ti/edit';
 import TiTrash from 'react-icons/lib/ti/trash';
+import {connect} from 'react-redux';
+import {removeRecipe} from '../../actions';
 
-export class Recipe extends Component {
+class Recipe extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -13,7 +15,6 @@ export class Recipe extends Component {
         }
 
         this.expandRecipe = this.expandRecipe.bind(this);
-        this.editRecipe = this.editRecipe.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
         this.openEditRecipeForm = this.openEditRecipeForm.bind(this);
         this.closeEditRecipeForm = this.closeEditRecipeForm.bind(this);
@@ -25,12 +26,8 @@ export class Recipe extends Component {
         });
     }
 
-    editRecipe(recipe) {
-
-    }
-
     handleDelete(e, recipeId) {
-        this.props.onRecipeDelete(recipeId);
+        this.props.onDeleteRecipe(recipeId);
     }
 
     openEditRecipeForm() {
@@ -83,9 +80,24 @@ export class Recipe extends Component {
                         <RecipeForm recipe={this.props.recipe}
                                     isEditMode={isEditMode}
                                     isEditModeActive={this.state.isEditModeActive}
-                                    editRecipe={this.editRecipe}
                                     closeEditForm={this.closeEditRecipeForm}/> : null}
             </li>
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        recipes: state.recipes
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onDeleteRecipe: (recipeId) => {
+            dispatch(removeRecipe(recipeId))
+        }
+    };    
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

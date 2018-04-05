@@ -59,5 +59,6 @@
     "isRecipesFetching": false,
     "isAddRecipeFormOpen": false,
     "isRecipePosting": false,
-    "isRecipePutting": false
+    "isRecipePutting": false,
+    "isRecipeDeleting": false
 }

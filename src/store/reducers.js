@@ -30,6 +30,10 @@ export const recipes = (state = [], action) => {
             //     action.payload
             // ];
 
+        case C.DELETE_RECIPE:
+            return [
+                ...state.filter(recipe => recipe.id !== action.payload)
+            ];
         default:
             return state;
     }
@@ -68,6 +72,17 @@ export const isRecipePutting = (state=false, action) => {
     }
 }
 
+export const isRecipeDeleting = (state=false, action) => {
+    switch (action.type) {
+        case C.DELETING_RECIPE:
+            return true;   
+        case C.DELETE_RECIPE:
+            return false;
+        default:
+            return state;
+    }
+}
+
 export const isAddRecipeFormOpen = (state = false, action) => {
     switch (action.type) {
         case C.OPEN_ADD_RECIPE_FORM:
@@ -83,5 +98,6 @@ export default combineReducers({
     isRecipesFetching,
     isAddRecipeFormOpen,
     isRecipePosting,
-    isRecipePutting
+    isRecipePutting,
+    isRecipeDeleting
 });

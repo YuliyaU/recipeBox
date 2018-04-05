@@ -1,5 +1,5 @@
 import C from './constants';
-import {getRecipes, addRecipe, editRecipe} from './api/api'
+import {getRecipes, addRecipe, editRecipe, deleteRecipe} from './api/api'
 // import { recipe } from './store/reducers';
 
 export function requestRecipes() {
@@ -80,6 +80,30 @@ export function putRecipe(recipe) {
         dispatch(puttingRecipe());
         return editRecipe(recipe).then(recipe => {
             dispatch(updateRecipe(recipe))
+        }).catch(err => {
+            console.log(err)
+        });
+    }
+}
+
+export function deletingRecipe() {
+    return {
+        type: C.DELETING_RECIPE
+    };
+}
+
+export function dropRecipe(recipeId) {
+    return {
+        type: C.DELETE_RECIPE,
+        payload: recipeId
+    };
+}
+
+export function removeRecipe(recipeId) {    
+    return dispatch => {
+        dispatch(deletingRecipe());
+        return deleteRecipe(recipeId).then(recipe => {
+            dispatch(dropRecipe(recipeId))
         }).catch(err => {
             console.log(err)
         });
