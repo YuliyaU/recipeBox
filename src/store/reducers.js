@@ -4,8 +4,11 @@ import {combineReducers} from 'redux';
 export const recipes = (state = [], action) => {
     switch (action.type) { 
         case C.RECEIVE_RECIPES:
+            return action.payload;
+        case C.CREATE_RECIPE:
             return [
-                ...action.payload
+                ...state,
+                action.payload
             ];
         default:
             return state;
@@ -23,6 +26,17 @@ export const isRecipesFetching = (state = false, action) => {
     }
 }
 
+export const isRecipePosting = (state=false, action) => {
+    switch (action.type) {
+        case C.POSTING_RECIPE:
+            return true;   
+        case C.SAVE_RECIPE:
+            return false;
+        default:
+            return state;
+    }
+}
+
 export const isAddRecipeFormOpen = (state = false, action) => {
     switch (action.type) {
         case C.OPEN_ADD_RECIPE_FORM:
@@ -33,33 +47,9 @@ export const isAddRecipeFormOpen = (state = false, action) => {
     }
 }
 
-// export const recipes = (
-//     state = {
-//         isRecipesFetching: false,
-//         recipes: []
-//     }, 
-//     action) => {
-//         switch (action.type) {
-//             case C.REQUEST_RECIPES:
-//                 return {
-//                     isRecipesFetching: true
-//                 };   
-//             case C.RECEIVE_RECIPES:
-//                 return {
-//                     isRecipesFetching: false,
-//                     recipes: action.payload
-//                 }
-//             default:
-//                 return state;
-//         }
-// }
-
 export default combineReducers({
     recipes,
     isRecipesFetching,
-    isAddRecipeFormOpen
+    isAddRecipeFormOpen,
+    isRecipePosting
 });
-
-// export default combineReducers({
-//     recipes
-// });

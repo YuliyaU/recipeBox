@@ -1,9 +1,6 @@
-import 'whatwg-fetch';
-import getBaseUrl from '../buildScripts/baseUrl';
 import C from './constants';
+import {getRecipes, addRecipe} from './api/api'
 // import { recipe } from './store/reducers';
-
-const baseUrl = getBaseUrl();
 
 export function requestRecipes() {
     return {
@@ -11,22 +8,19 @@ export function requestRecipes() {
     }
 }
 
-export function receiveRecipes(json) {
+export function receiveRecipes(recipes) {
     return {
         type: C.RECEIVE_RECIPES,
-        payload: json
+        payload: recipes
     }
 }
 
 export function fetchRecipes() {
     return dispatch => {
         dispatch(requestRecipes());
-        return fetch(baseUrl + 'recipes')
-            .then(
-                response => response.json(), 
-                err => console.log(err))
-            .then(
-                json => dispatch(receiveRecipes(json)))
+        return getRecipes().then(recipes => { 
+            dispatch(receiveRecipes(recipes))
+        })
     }      
 }
 
@@ -42,4 +36,28 @@ export function closeAddRecipeForm() {
         type: C.CLOSE_ADD_RECIPE_FORM,
         payload: false
     };
+}
+
+export function postingRecipe() {
+    return {
+        type: C.POSTING_RECIPE
+    };
+}
+
+export function createRecipe(recipe) {
+    return {
+        type: C.CREATE_RECIPE,
+        payload: recipe
+    };
+}
+
+export function saveRecipe(recipe) {    
+    return dispatch => {
+        dispatch(postingRecipe());
+        return addRecipe(recipe).then(recipe => {
+            dispatch(createRecipe(recipe))
+        }).catch(err => {
+            console.log(err)
+        });
+    }
 }

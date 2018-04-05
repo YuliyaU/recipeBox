@@ -1,14 +1,8 @@
 import {Component} from 'react';
-import {RecipeForm} from './RecipeForm';
+import RecipeForm from './RecipeForm';
 import TiPlus from 'react-icons/lib/ti/plus';
 
 const AddRecipe = ({isAddRecipeFormOpen, onAddRecipeBtnClick}) => {
-
-    // const closeAddRecipeForm = () => {
-    //     this.setState({
-    //         isAddRecipeFormOpen: false
-    //     }, () => {console.log(this.state.isAddRecipeFormOpen)});
-    // }
 
     var isEditMode = false, _recipeName = '';
 
@@ -25,9 +19,3 @@ const AddRecipe = ({isAddRecipeFormOpen, onAddRecipeBtnClick}) => {
 } 
 
 export default AddRecipe;
-
-//                 {this.state.isAddRecipeFormActive ? 
-//                     <RecipeForm isEditMode={isEditMode}
-//                                 onNewRecipe={this.props.onNewRecipe}
-//                                 closeAddRecipeForm={this.closeAddRecipeForm}/> : null}
-//             </div>

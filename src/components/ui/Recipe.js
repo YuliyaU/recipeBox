@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import {Ingredient} from './Ingredient';
-import {RecipeForm} from './RecipeForm';
+import RecipeForm from './RecipeForm';
 import TiEdit from 'react-icons/lib/ti/edit';
 import TiTrash from 'react-icons/lib/ti/trash';
 
@@ -8,15 +8,14 @@ export class Recipe extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isEditMode: true,
             isEditModeActive: false,
             isRecipeExpanded: false
         }
 
         this.expandRecipe = this.expandRecipe.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
-        this.openEditForm = this.openEditForm.bind(this);
-        this.closeEditForm = this.closeEditForm.bind(this);
+        this.openEditRecipeForm = this.openEditRecipeForm.bind(this);
+        this.closeEditRecipeForm = this.closeEditRecipeForm.bind(this);
     }
 
     expandRecipe() {
@@ -29,21 +28,20 @@ export class Recipe extends Component {
         this.props.onRecipeDelete(recipeId);
     }
 
-    openEditForm() {
+    openEditRecipeForm() {
         this.setState({
             isEditModeActive: true
         });
     }
 
-    closeEditForm() {
+    closeEditRecipeForm() {
         this.setState({
             isEditModeActive: false
         });
     }
 
     render() {
-
-    // Show a recipe item onClick
+        var isEditMode = true;
         return (
             <li className="recipe-block"
                 id={this.props.recipe.id}>
@@ -59,7 +57,7 @@ export class Recipe extends Component {
                                         ingredient={ingredient}/>) : 'There is no ingredients'}</ul> : null}
                 <div className="recipe-controls">
                     <span className="recipe-controls__item"
-                          onClick={this.openEditForm}><TiEdit /></span>
+                          onClick={this.props.openEditRecipeForm}><TiEdit /></span>
                     <span className="recipe-controls__item"
                         onClick={e => this.handleDelete(e, this.props.recipe.id)}><TiTrash /></span>
                     {this.state.isEditModeActive ? 
@@ -67,7 +65,7 @@ export class Recipe extends Component {
                                     isEditMode={this.state.isEditMode}
                                     isEditModeActive={this.state.isEditModeActive}
                                     editRecipe={this.props.editRecipe}
-                                    closeEditForm={this.closeEditForm}/> : null}
+                                    closeEditForm={this.closeEditRecipeForm}/> : null}
                 </div>
             </li>
         );

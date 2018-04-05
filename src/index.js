@@ -11,7 +11,8 @@ const store = createStore(
 
 store
     .dispatch(fetchRecipes())
-    .then(() => {console.log(store.getState())});
+    .then(() => {console.log(store.getState())})
+    .catch(err => {console.log(err)});
 
 // import C from './constants';
 import React from 'react';
@@ -21,7 +22,6 @@ import ReactDOM from 'react-dom';
 // import storeFactory from './store';
 import {Provider} from 'react-redux';
 import {App} from '../src/components/ui/App';
-// import {getRecipies} from './api/api';
 
 // // const initialState = sampleData;
 // // const store = storeFactory(initialState);
@@ -29,14 +29,6 @@ import {App} from '../src/components/ui/App';
 // const store = storeFactory(sampleData);
 
 // console.log(store.getState());
-
-// store.subscribe(() => {
-//     console.log(`
-//         state
-//         =============
-//         ${store.getState()}
-//     `);
-// });
 
 window.React = React;
 window.store = store;

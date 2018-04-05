@@ -4,17 +4,26 @@ import getBaseUrl from '../../buildScripts/baseUrl';
 
 const baseUrl = getBaseUrl();
 
-// When UI would be ready, separate on three branches:
-// - Calls to mock data (DB)
-// // - Redux + calls to mock data (DB) 
-// - FCC: calls to local storage
+export function getRecipes() {
+    return fetch(baseUrl + 'recipes').then(onSuccess, onError);
+}
 
-export function getRecipies() {
-    return fetch(baseUrl + 'recipies').then(onSuccess, onError);
+export function addRecipe(recipe) {
+    return fetch(baseUrl + 'recipes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: recipe.id,
+            recipeName: recipe.recipeName,
+            ingredients: recipe.ingredients
+        })
+    }).then(onSuccess, onError);
 }
 
 export function deleteRecipe(id) {
-    return fetch(baseUrl + `recipies/${id}`, {
+    return fetch(baseUrl + `recipes/${id}`, {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
@@ -23,7 +32,7 @@ export function deleteRecipe(id) {
 }
 
 export function editRecipe(editedRecipe) {
-    return fetch(baseUrl + `recipies/${editedRecipe.id}`, {
+    return fetch(baseUrl + `recipes/${editedRecipe.id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
