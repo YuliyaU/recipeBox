@@ -9,4 +9,4 @@ export const App = () => {
             <footer><span>Made by Yuliya Ulanova, 2018</span></footer>
         </div>
     );
-}
+};

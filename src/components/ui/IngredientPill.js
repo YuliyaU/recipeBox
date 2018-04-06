@@ -8,4 +8,4 @@ export const IngredientPill = ({ingredient, onDeleteIngredient}) => {
                   onClick={e => onDeleteIngredient(e, ingredient.ingredientId)}><TiTimes /></span>
         </span>
     );
-}
+};

@@ -11,8 +11,8 @@ const store = createStore(
 
 store
     .dispatch(fetchRecipes())
-    .then(() => {console.log(store.getState())})
-    .catch(err => {console.log(err)});
+    .then(() => {console.log(store.getState());})
+    .catch(err => {console.log(err);});
 
 // import C from './constants';
 import React from 'react';

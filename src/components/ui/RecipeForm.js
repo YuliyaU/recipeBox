@@ -5,11 +5,10 @@ import {closeAddRecipeForm, saveRecipe, putRecipe} from '../../actions';
 
 class RecipeForm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             addedIngredients: []  
-        }  
-
+        };  
 
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onAddIngredient = this.onAddIngredient.bind(this);
@@ -56,30 +55,27 @@ class RecipeForm extends Component {
     }
 
     onAddIngredient(ingredient) {
-        ingredient.ingredientName ? this.setState({
-            addedIngredients: [
-                ...this.state.addedIngredients,
-                ingredient
-            ]
-        }) : console.log("It's an empty ingredient");
+        if (ingredient.ingredientName) { 
+            this.setState({
+                addedIngredients: [
+                    ...this.state.addedIngredients,
+                    ingredient
+                ]
+            });
+        }
     }
 
     onDeleteIngredient(e, ingredientId) {
         var newIngredientsArr = this.state.addedIngredients;
-        var msg = '';
         for (var i = 0; i < newIngredientsArr.length; i += 1) {
             if (newIngredientsArr[i]['ingredientId'] == ingredientId) {
                 newIngredientsArr.splice(i, 1);
                 this.setState({
                     addedIngredients: newIngredientsArr
-                }, () => console.log(this.state.addedIngredients));
-                msg = 'The ingredient is found.'
+                });
                 break;
-            } else {
-                msg = "The ingredient wasn't found.";
             }
         }
-        console.log(msg);
     }
 
     // A bag:
@@ -151,20 +147,20 @@ const mapStateToProps = (state) => {
     return {
         recipes: state.recipes
     };
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onNewRecipe: (recipe) => {
-            dispatch(saveRecipe(recipe))
+            dispatch(saveRecipe(recipe));
         },
         closeAddRecipeForm: () => {
-            dispatch(closeAddRecipeForm())
+            dispatch(closeAddRecipeForm());
         },
         onEditRecipe: (recipe) => {
-            dispatch(putRecipe(recipe))
+            dispatch(putRecipe(recipe));
         }
     };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeForm);

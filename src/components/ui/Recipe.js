@@ -8,11 +8,11 @@ import {deleteRecipe} from '../../actions';
 
 class Recipe extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isEditModeActive: false,
             isRecipeExpanded: false
-        }
+        };
 
         this.expandRecipe = this.expandRecipe.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -89,15 +89,15 @@ class Recipe extends Component {
 const mapStateToProps = (state) => {
     return {
         recipes: state.recipes
-    }
-}
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteRecipe: (recipeId) => {
-            dispatch(deleteRecipe(recipeId))
+            dispatch(deleteRecipe(recipeId));
         }
     };    
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Recipe);

@@ -1,26 +1,28 @@
 import C from './constants';
-import * as recipesApi from './api/api'
+import * as recipesApi from './api/api';
 
 export function requestRecipes() {
     return {
         type: C.REQUEST_RECIPES
-    }
+    };
 }
 
 export function receiveRecipes(recipes) {
     return {
         type: C.RECEIVE_RECIPES,
         payload: recipes
-    }
+    };
 }
 
 export function fetchRecipes() {
     return dispatch => {
         dispatch(requestRecipes());
         return recipesApi.getRecipes().then(recipes => { 
-            dispatch(receiveRecipes(recipes))
-        })
-    }      
+            dispatch(receiveRecipes(recipes));
+        }).catch(err => {
+            throw err;
+        });
+    };
 }
 
 export function openAddRecipeForm() {
@@ -54,11 +56,11 @@ export function saveRecipe(recipe) {
     return dispatch => {
         dispatch(postingRecipe());
         return recipesApi.addRecipe(recipe).then(recipe => {
-            dispatch(createRecipe(recipe))
+            dispatch(createRecipe(recipe));
         }).catch(err => {
-            console.log(err)
+            throw err;
         });
-    }
+    };
 }
 
 export function puttingRecipe() {
@@ -78,11 +80,11 @@ export function putRecipe(recipe) {
     return dispatch => {
         dispatch(puttingRecipe());
         return recipesApi.editRecipe(recipe).then(recipe => {
-            dispatch(updateRecipe(recipe))
+            dispatch(updateRecipe(recipe));
         }).catch(err => {
-            console.log(err)
+            throw err;
         });
-    }
+    };
 }
 
 export function deletingRecipe() {
@@ -101,10 +103,10 @@ export function removeRecipe(recipeId) {
 export function deleteRecipe(recipeId) {    
     return dispatch => {
         dispatch(deletingRecipe());
-        return recipesApi.deleteRecipe(recipeId).then(recipe => {
-            dispatch(removeRecipe(recipeId))
+        return recipesApi.deleteRecipe(recipeId).then(() => {
+            dispatch(removeRecipe(recipeId));
         }).catch(err => {
-            console.log(err)
+            throw err;
         });
-    }
+    };
 }

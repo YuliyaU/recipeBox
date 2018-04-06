@@ -50,6 +50,6 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-    console.log(error);
+    throw error;
 }
 

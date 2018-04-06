@@ -3,4 +3,4 @@ export const Ingredient = ({ingredient}) => {
         <li>{ingredient.ingredientName ? ingredient.ingredientName : 
                 'Untitled Ingredient'}</li>
     );
-}
+};

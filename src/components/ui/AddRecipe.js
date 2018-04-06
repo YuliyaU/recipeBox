@@ -1,10 +1,9 @@
-import {Component} from 'react';
 import RecipeForm from './RecipeForm';
 import TiPlus from 'react-icons/lib/ti/plus';
 
 const AddRecipe = ({isAddRecipeFormOpen, onAddRecipeBtnClick}) => {
 
-    var isEditMode = false, _recipeName = '';
+    var isEditMode = false;
 
     return (
         <div>
@@ -17,7 +16,6 @@ const AddRecipe = ({isAddRecipeFormOpen, onAddRecipeBtnClick}) => {
                 <RecipeForm isEditMode={isEditMode} />}
         </div>
     );
-    
-} 
+};
 
 export default AddRecipe;

@@ -1,6 +1,6 @@
 // Building a storeFactory
 
-import C from '../constants';
+// import C from '../constants';
 import appReducer from './reducers';
 
 // To associate this middleware with our store we need to
@@ -32,19 +32,18 @@ const consoleMessages = function (store) {
             result = next(action);
 
             // Getting a state after the action was dispatched
-            let {recipes, isEditMode, addedIngredients} = store.getState();
+            let {recipes} = store.getState();
 
             console.log(`
                 recipies: ${recipes.length}
-                isEditMode: ${isEditMode}
             `);
 
             console.groupEnd();
 
             // To make sure the state is registered we need to:
             return result;
-        }
-    }
+        };
+    };
 };
 
 export default (initialState = {}) => {
@@ -52,4 +51,4 @@ export default (initialState = {}) => {
     // return createStore(appReducer, initialState);
     // We need to use
     return applyMiddleware(consoleMessages)(createStore)(appReducer, initialState);
-}
+};

@@ -37,7 +37,7 @@ export const recipes = (state = [], action) => {
         default:
             return state;
     }
-}
+};
 
 export const isRecipesFetching = (state = false, action) => {
     switch (action.type) {
@@ -48,7 +48,7 @@ export const isRecipesFetching = (state = false, action) => {
         default:
             return state;
     }
-}
+};
 
 export const isRecipePosting = (state=false, action) => {
     switch (action.type) {
@@ -59,7 +59,7 @@ export const isRecipePosting = (state=false, action) => {
         default:
             return state;
     }
-}
+};
 
 export const isRecipePutting = (state=false, action) => {
     switch (action.type) {
@@ -70,7 +70,7 @@ export const isRecipePutting = (state=false, action) => {
         default:
             return state;
     }
-}
+};
 
 export const isRecipeDeleting = (state=false, action) => {
     switch (action.type) {
@@ -81,7 +81,7 @@ export const isRecipeDeleting = (state=false, action) => {
         default:
             return state;
     }
-}
+};
 
 export const isAddRecipeFormOpen = (state = false, action) => {
     switch (action.type) {
@@ -91,7 +91,7 @@ export const isAddRecipeFormOpen = (state = false, action) => {
         default:
             return state;
     }
-}
+};
 
 export default combineReducers({
     recipes,

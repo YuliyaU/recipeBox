@@ -5,21 +5,20 @@ import {IngredientPill} from './IngredientPill';
 
 export class ManipulateIngredients extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isAddIngredientClicked: false  
-        }        
+        };
 
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(e, ingredient) {               
-        if (this.state.isAddIngredientClicked) {
-            console.log(ingredient);       
+        if (this.state.isAddIngredientClicked) {   
             this.props.onAddIngredient(ingredient);
             this.setState({
                 isAddIngredientClicked: false
-            }, () => console.log(this.props.addedIngredients));
+            });
         } else {
             this.setState({
                 isAddIngredientClicked: true
