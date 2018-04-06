@@ -4,7 +4,7 @@ import RecipeForm from './RecipeForm';
 import TiEdit from 'react-icons/lib/ti/edit';
 import TiTrash from 'react-icons/lib/ti/trash';
 import {connect} from 'react-redux';
-import {removeRecipe} from '../../actions';
+import {deleteRecipe} from '../../actions';
 
 class Recipe extends Component {
     constructor(props) {
@@ -95,7 +95,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         onDeleteRecipe: (recipeId) => {
-            dispatch(removeRecipe(recipeId))
+            dispatch(deleteRecipe(recipeId))
         }
     };    
 }

@@ -1,6 +1,5 @@
 import C from './constants';
-import {getRecipes, addRecipe, editRecipe, deleteRecipe} from './api/api'
-// import { recipe } from './store/reducers';
+import * as recipesApi from './api/api'
 
 export function requestRecipes() {
     return {
@@ -18,7 +17,7 @@ export function receiveRecipes(recipes) {
 export function fetchRecipes() {
     return dispatch => {
         dispatch(requestRecipes());
-        return getRecipes().then(recipes => { 
+        return recipesApi.getRecipes().then(recipes => { 
             dispatch(receiveRecipes(recipes))
         })
     }      
@@ -54,7 +53,7 @@ export function createRecipe(recipe) {
 export function saveRecipe(recipe) {    
     return dispatch => {
         dispatch(postingRecipe());
-        return addRecipe(recipe).then(recipe => {
+        return recipesApi.addRecipe(recipe).then(recipe => {
             dispatch(createRecipe(recipe))
         }).catch(err => {
             console.log(err)
@@ -78,7 +77,7 @@ export function updateRecipe(recipe) {
 export function putRecipe(recipe) {    
     return dispatch => {
         dispatch(puttingRecipe());
-        return editRecipe(recipe).then(recipe => {
+        return recipesApi.editRecipe(recipe).then(recipe => {
             dispatch(updateRecipe(recipe))
         }).catch(err => {
             console.log(err)
@@ -92,18 +91,18 @@ export function deletingRecipe() {
     };
 }
 
-export function dropRecipe(recipeId) {
+export function removeRecipe(recipeId) {
     return {
         type: C.DELETE_RECIPE,
         payload: recipeId
     };
 }
 
-export function removeRecipe(recipeId) {    
+export function deleteRecipe(recipeId) {    
     return dispatch => {
         dispatch(deletingRecipe());
-        return deleteRecipe(recipeId).then(recipe => {
-            dispatch(dropRecipe(recipeId))
+        return recipesApi.deleteRecipe(recipeId).then(recipe => {
+            dispatch(removeRecipe(recipeId))
         }).catch(err => {
             console.log(err)
         });
