@@ -54,7 +54,7 @@ export const isRecipePosting = (state=false, action) => {
     switch (action.type) {
         case C.POSTING_RECIPE:
             return true;   
-        case C.SAVE_RECIPE:
+        case C.CREATE_RECIPE:
             return false;
         default:
             return state;

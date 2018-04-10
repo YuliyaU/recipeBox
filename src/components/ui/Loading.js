@@ -1,7 +1,7 @@
-export const Loading = () => {
+export const Loading = ({text}) => {
     return (
         <div>
-            Loading...
+            {text}
         </div>
     );
 };

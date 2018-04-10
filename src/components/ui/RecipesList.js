@@ -1,7 +1,7 @@
 import Recipe from './Recipe';
 import {Loading} from './Loading';
 
-const RecipesList = ({recipes, isRecipesFetching}) => {
+const RecipesList = ({recipes, isRecipesFetching, isRecipePosting}) => {
     var hasRecipes = false, msg = '';    
     
     if (recipes) {
@@ -19,13 +19,15 @@ const RecipesList = ({recipes, isRecipesFetching}) => {
     } else {
         msg = 'There is no recipes. Add some.';
     }
+
     return (
-        <ul>
-            {isRecipesFetching && <Loading />}            
+        <ul>                       
             {hasRecipes ? recipes.map(recipe => 
                 <Recipe key={recipe.id}
                         recipe={recipe} />
             ) : msg}
+            {isRecipesFetching ? <Loading text="Loading..." /> : 
+            isRecipePosting && <Loading text="Saving the recipe..." />} 
         </ul>
     );
 };
