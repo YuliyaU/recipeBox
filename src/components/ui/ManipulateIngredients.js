@@ -1,9 +1,9 @@
-import {Component} from 'react';
+import React from 'react';
 import {AddIngredientBtn} from './AddIngredientBtn';
 import {AddIngredient} from './AddIngredient';
 import {IngredientPill} from './IngredientPill';
 
-export class ManipulateIngredients extends Component {
+export class ManipulateIngredients extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

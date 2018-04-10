@@ -1,9 +1,9 @@
-import {Component} from 'react';
+import React from 'react';
 import {ManipulateIngredients} from './ManipulateIngredients';
 import {connect} from 'react-redux';
 import {closeAddRecipeForm, saveRecipe, putRecipe} from '../../actions';
 
-class RecipeForm extends Component {
+export class RecipeForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {

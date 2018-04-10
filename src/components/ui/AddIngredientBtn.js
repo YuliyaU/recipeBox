@@ -1,3 +1,4 @@
+import React from 'react';
 import TiPlus from 'react-icons/lib/ti/plus';
 
 export const AddIngredientBtn = (props) => {
