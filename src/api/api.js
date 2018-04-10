@@ -4,29 +4,45 @@ import getBaseUrl from '../../buildScripts/baseUrl';
 
 const baseUrl = getBaseUrl();
 
-// When UI would be ready, separate on three branches:
-// - Calls to mock data (DB)
-// // - Redux + calls to mock data (DB) 
-// - FCC: calls to local storage
-
-export function getRecepies() {
-    return get('recepies');
+export function getRecipes() {
+    return fetch(baseUrl + 'recipes').then(onSuccess, onError);
 }
 
-export function deleteRecepe(id) {
-    return del(`recepies/${id}`);
+export function addRecipe(recipe) {
+    return fetch(baseUrl + 'recipes', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: recipe.id,
+            recipeName: recipe.recipeName,
+            ingredients: recipe.ingredients
+        })
+    }).then(onSuccess, onError);
 }
 
-function get(url) {
-    return fetch(baseUrl + url).then(onSuccess, onError);
+export function deleteRecipe(id) {
+    return fetch(baseUrl + `recipes/${id}`, {
+        method: 'DELETE',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(onSuccess, onError);
 }
 
-// Can't call func delete since it's reserved word
-function del(url) {
-    const request = new Request(baseUrl + url, {
-        method: 'DELETE'
-    });
-    return fetch(request).then(onSuccess, onError);
+export function editRecipe(editedRecipe) {
+    return fetch(baseUrl + `recipes/${editedRecipe.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            id: editedRecipe.id,
+            recipeName: editedRecipe.recipeName,
+            ingredients: editedRecipe.ingredients
+        })
+    }).then(onSuccess, onError);
 }
 
 function onSuccess(response) {
@@ -34,6 +50,6 @@ function onSuccess(response) {
 }
 
 function onError(error) {
-    console.log(error);
+    throw error;
 }
 

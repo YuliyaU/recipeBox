@@ -11,7 +11,7 @@ export const AddIngredient = (props) => {
         ingredient['ingredientId'] = props.generateId();
         ingredient['ingredientName'] = inputValue;
         return ingredient;
-    }
+    };
 
     return (
         <div id="add-ingredient" className="add-ingredient">
@@ -21,4 +21,4 @@ export const AddIngredient = (props) => {
             <button onClick={e => props.handleClick(e, ingredient)}><TiTick /></button>
         </div>        
     );
-}
+};

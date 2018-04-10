@@ -8,4 +8,4 @@ export const AddIngredientBtn = (props) => {
             <span className="btn-tip">Add Ingredient</span>
         </div>
     );
-}
+};

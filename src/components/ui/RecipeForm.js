@@ -1,48 +1,29 @@
 import {Component} from 'react';
-import {AddIngredientBtn} from './AddIngredientBtn';
-import {AddIngredient} from './AddIngredient';
-import {IngredientPill} from './IngredientPill';
+import {ManipulateIngredients} from './ManipulateIngredients';
+import {connect} from 'react-redux';
+import {closeAddRecipeForm, saveRecipe, putRecipe} from '../../actions';
 
-export class RecipeForm extends Component {
+class RecipeForm extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
-            isAddIngredientClicked: false,
-            addedIngredients: []            
-        }
+            addedIngredients: []  
+        };  
 
-        this.handleClick = this.handleClick.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.generateId = this.generateId.bind(this);
+        this.onAddIngredient = this.onAddIngredient.bind(this);
         this.onDeleteIngredient = this.onDeleteIngredient.bind(this);
+        this.generateId = this.generateId.bind(this);
         this.onCancel = this.onCancel.bind(this);
-    }
-
-    handleClick(e, ingredient) {               
-        if (this.state.isAddIngredientClicked) {
-            console.log(ingredient);            
-            this.setState({
-                addedIngredients: [
-                    ...this.state.addedIngredients,
-                    ingredient
-                ],
-                isAddIngredientClicked: false
-            }, () => console.log(this.state.addedIngredients));
-        } else {
-            this.setState({
-                isAddIngredientClicked: true
-            });
-        }
     }
 
     handleSubmit(e, recipeId) {
         e.preventDefault();   
         
         var recipeName = this.refs._recipeName;
-        console.log('refs value ' + recipeName.value);
 
         if (recipeId) {
-            this.props.editRecipe(recipeId, {
+            this.props.onEditRecipe({
                 id: recipeId,
                 recipeName: recipeName.value,
                 ingredients: this.state.addedIngredients
@@ -65,18 +46,23 @@ export class RecipeForm extends Component {
         } else {
             this.props.closeAddRecipeForm();
         }        
-
-        // Change or remove completely transition and instantly hide the form
-        // var addRecipeForm = document.getElementById('add-recipe-form');
-        // if (addRecipeForm.classList.contains('unhid')) {
-        //     addRecipeForm.classList.remove('unhid');
-        // }
     }
 
     generateId() {
         var date = Date.now().toString(),
             id = date + Math.random().toFixed(3).toString();
         return id;
+    }
+
+    onAddIngredient(ingredient) {
+        if (ingredient.ingredientName) { 
+            this.setState({
+                addedIngredients: [
+                    ...this.state.addedIngredients,
+                    ingredient
+                ]
+            });
+        }
     }
 
     onDeleteIngredient(e, ingredientId) {
@@ -86,16 +72,11 @@ export class RecipeForm extends Component {
                 newIngredientsArr.splice(i, 1);
                 this.setState({
                     addedIngredients: newIngredientsArr
-                }, () => console.log(this.state.addedIngredients));
-            } else {
-                console.log("The ingredient wasn't found.");
+                });
+                break;
             }
         }
     }
-
-    // A bag (fixed):
-    // The onCancel() doesn't only clear the form but changes a recipies state
-    // And adds canceled recipe into a recipies list
 
     // A bag:
     // The onCancel() doesn't clear and cancel the ingredient input when 
@@ -117,6 +98,7 @@ export class RecipeForm extends Component {
             this.props.closeAddRecipeForm();
         }
     }
+    
     componentWillMount() {
         if (this.props.isEditModeActive && this.props.isEditMode) {
             this.setState({
@@ -124,7 +106,6 @@ export class RecipeForm extends Component {
             });
         }
     }
-
 
     render() {
         var recipeId = '';
@@ -148,17 +129,10 @@ export class RecipeForm extends Component {
                                    placeholder="Recipe Name"
                                    ref="_recipeName" />}
                     </div>
-                    <div>
-                        { this.state.addedIngredients ? 
-                            this.state.addedIngredients.map(ingredient => 
-                                <IngredientPill key={ingredient.ingredientId}
-                                                ingredient={ingredient}
-                                                onDeleteIngredient={this.onDeleteIngredient}/>) : null }
-                        { this.state.isAddIngredientClicked ? 
-                            <AddIngredient handleClick={this.handleClick}
-                                           generateId={this.generateId}/> : 
-                            <AddIngredientBtn handleClick={this.handleClick}/> }
-                    </div>
+                        <ManipulateIngredients addedIngredients={this.state.addedIngredients}
+                                               onAddIngredient={this.onAddIngredient}
+                                               onDeleteIngredient={this.onDeleteIngredient}
+                                               generateId={this.generateId}/>
                     <div>
                         <button onClick={e => this.onCancel(e)}>Cancel</button>
                         <button type="submit">Save the Recipe</button>
@@ -168,3 +142,25 @@ export class RecipeForm extends Component {
         );
     }
 }
+
+const mapStateToProps = (state) => {
+    return {
+        recipes: state.recipes
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        onNewRecipe: (recipe) => {
+            dispatch(saveRecipe(recipe));
+        },
+        closeAddRecipeForm: () => {
+            dispatch(closeAddRecipeForm());
+        },
+        onEditRecipe: (recipe) => {
+            dispatch(putRecipe(recipe));
+        }
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeForm);

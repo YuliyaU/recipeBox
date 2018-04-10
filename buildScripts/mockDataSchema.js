@@ -1,7 +1,7 @@
 module.exports = {
     "type": "object",
     "properties": {
-        "recipies": {
+        "recipes": {
             "type": "array",
             "minItems": 3,
             "maxItems": 5,
@@ -38,5 +38,5 @@ module.exports = {
             }
         }        
     },
-    required: ["recipies"]
+    required: ["recipes"]
 };
