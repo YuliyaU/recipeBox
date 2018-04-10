@@ -14,12 +14,23 @@ export function receiveRecipes(recipes) {
     };
 }
 
+/* export function throwRequestError() {
+    return {
+        action: C.REQUEST_RECIPE_ERROR,
+        payload: true
+    };
+}*/
+
 export function fetchRecipes() {
     return dispatch => {
         dispatch(requestRecipes());
         return recipesApi.getRecipes().then(recipes => { 
             dispatch(receiveRecipes(recipes));
         }).catch(err => {
+            // Here you should dispatch(trowRequetsError)
+            // and manage the msg of a failed request in the components.
+            // Don't forget to return C.REQUEST_RECIPE_ERROR to false
+            // after time interval or when the request became successful
             throw err;
         });
     };
