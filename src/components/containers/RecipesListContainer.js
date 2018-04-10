@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 
 const mapStateToProps = (state) => {
     return {
-        recipes: state.recipes
+        recipes: state.recipes,
+        isRecipesFetching: state.isRecipesFetching
     };
 };
 
